@@ -1,5 +1,69 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .card-hover { 
+    transition: all 0.3s ease; 
+  }
+  .card-hover:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 24px rgba(0,0,0,0.15); 
+  }
+  .text-shadow { 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  }
+  .gradient-bg { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+  }
+  .gradient-bg-vertical { 
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%);
+    background-attachment: fixed;
+  }
+  .gradient-bg-elegant { 
+    background: linear-gradient(180deg, #fefefe 0%, #f7f9fc 30%, #eef2f7 60%, #e1e8ef 90%, #d1d9e0 100%);
+    background-attachment: fixed;
+  }
+  .card-fixed {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-header { 
+    min-height: 32px;
+    margin-bottom: 8px;
+  }
+  .card-content { 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-tags {
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  .card-footer {
+    min-height: 28px;
+    display: flex;
+    align-items: flex-end;
+  }
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 body {
   margin: 0;
   color: #fff;
