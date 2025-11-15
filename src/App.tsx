@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -6,6 +5,7 @@ import { Card } from './components/Card';
 import { Nav } from './components/Nav';
 import { FilterBar } from './components/FilterBar';
 import { ResultsCount } from './components/ResultsCount';
+import { ActiveFilters } from './components/ActiveFilters';
 import { cardsData } from './data/cards';
 import { rootStore } from './stores';
 import { observer } from 'mobx-react-lite';
@@ -21,6 +21,7 @@ const App = observer(() => {
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-10">
         <section className="mb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FilterBar />
+          <ActiveFilters />
           <ResultsCount totalCount={cardsData.length} filteredCount={filteredCards.length} />
         </section>
 

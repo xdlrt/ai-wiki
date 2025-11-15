@@ -26,7 +26,7 @@ export class RootStore {
     this.currentMarket = market;
   }
 
-  setCurrentType(type: 'all' | 'stock' | 'etf' | 'crypto' | 'strategy') {
+  setCurrentType(type: 'all' | 'stock' | 'etf' | 'crypto' | 'strategy' | 'bond') {
     this.currentType = type;
   }
 
