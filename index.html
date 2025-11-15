@@ -30,6 +30,46 @@
             .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
             .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
             .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            .card-fixed {
+                height: 240px;
+                display: flex;
+                flex-direction: column;
+            }
+            .card-header { 
+                min-height: 32px;
+                margin-bottom: 8px;
+            }
+            .card-content { 
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .card-tags {
+                min-height: 24px;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 4px;
+                margin-bottom: 12px;
+            }
+            .card-footer {
+                min-height: 28px;
+                display: flex;
+                align-items: flex-end;
+            }
+            .line-clamp-1 {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
         }
     </style>
 </head>
@@ -101,7 +141,7 @@
         const cardsData = [
             {
                 title: 'VOO 与 SPY 深度对比',
-                desc: '长期买入持有策略的最佳选择',
+                desc: '长期买入持有策略的最佳选择，费用率与追踪误差的全方位对比分析',
                 href: 'investment/voo_vs_spy.html',
                 category: 'Investment',
                 tags: ['ETF','S&P500','VOO','SPY'],
@@ -136,23 +176,29 @@
             list.forEach((item, idx) => {
                 const a = document.createElement('a');
                 a.href = item.href;
-                a.className = 'block bg-white rounded-lg border border-gray-200 shadow-sm p-6 card-hover focus:outline-none focus:ring-2 focus:ring-primary';
+                a.className = 'block bg-white rounded-lg border border-gray-200 shadow-sm p-6 card-hover card-fixed focus:outline-none focus:ring-2 focus:ring-primary';
                 a.setAttribute('aria-label', item.title);
                 a.setAttribute('tabindex', '0');
 
-                const tags = item.tags.map(t => `<button type="button" class="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded" data-tag="${t}">${t}</button>`).join(' ');
+                const tags = item.tags.map(t => `<span class="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded cursor-pointer hover:bg-gray-200 transition-colors select-none" data-tag="${t}" tabindex="0">${t}</span>`).join(' ');
                 a.innerHTML = `
-                    <div class="flex items-start mb-3">
-                        <div class="bg-blue-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center"><i class="fas fa-file-lines text-blue-600 text-base"></i></div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900">${item.title}</h3>
+                    <div class="card-header">
+                        <div class="flex items-start">
+                            <div class="bg-blue-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center"><i class="fas fa-file-lines text-blue-600 text-base"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 line-clamp-1">${item.title}</h3>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-4">${item.desc}</p>
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center space-x-2">${tags}</div>
+                    <div class="card-content">
+                        <p class="text-gray-600 mb-2 line-clamp-2">${item.desc}</p>
+                        <div class="card-tags">
+                            <div class="flex items-center space-x-2">${tags}</div>
+                        </div>
                     </div>
-                    <div class="text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2">更新时间：${item.updatedAt}</div>
+                    <div class="card-footer">
+                        <div class="text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2 w-full">更新时间：${item.updatedAt}</div>
+                    </div>
                 `;
                 cardsEl.appendChild(a);
             });
@@ -195,11 +241,22 @@
                 searchEl.value = '';
                 filterCards();
             }
+            
+            // 标签键盘支持
+            if (e.target.classList.contains('tag') && e.key === 'Enter') {
+                e.preventDefault();
+                const v = e.target.getAttribute('data-tag') || '';
+                searchEl.value = v;
+                filterCards();
+                searchEl.focus();
+            }
         });
 
         cardsEl.addEventListener('click', e => {
             const t = e.target;
             if (t && t.classList.contains('tag')) {
+                e.preventDefault();
+                e.stopPropagation();
                 const v = t.getAttribute('data-tag') || '';
                 searchEl.value = v;
                 filterCards();
