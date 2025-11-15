@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCD股票策略分析：网格策略 vs 期权轮策略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">   
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FFFFFF;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 1.25rem; /* 20px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .highlight-gradient-blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0), rgba(59, 130, 246, 0.05));
+        }
+        .highlight-gradient-green {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0), rgba(34, 197, 94, 0.05));
+        }
+        .highlight-gradient-purple {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0), rgba(168, 85, 247, 0.05));
+        }
+        .highlight-gradient-orange {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0), rgba(249, 115, 22, 0.05));
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            <!-- 标题卡片 -->
+            <div class="card md:col-span-4 p-8 flex flex-col justify-center">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <div class="relative">
+                    <h1 class="text-4xl md:text-5xl font-black text-gray-800 mb-4">MCD股票策略分析</h1>
+                    <p class="text-xl md:text-2xl font-bold text-blue-600 mb-2">网格策略 vs 期权轮策略</p>
+                    <p class="text-gray-600">小资金场景下的最优选择</p>
+                </div>
+            </div>
+
+            <!-- 核心观点摘要 -->
+            <div class="card md:col-span-4 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-green"></div>
+                <div class="relative">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">核心观点摘要</h2>
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                        <p class="text-lg font-bold text-green-800 mb-2">在资金量较小（小资金范围）的情况下，网格策略在替代期权轮策略方面具有明显优势。</p>
+                        <p class="text-gray-700">MCD作为低波动防御性股票（年化波动率12-18%，beta系数0.52），更适合网格策略的操作特性。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCD股票基本信息 -->
+            <div class="card md:col-span-2 p-8 flex flex-col justify-between">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">MCD股票特征</h3>
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <p class="text-gray-600">当前股价</p>
+                            <p class="text-4xl font-black text-purple-600 font-poppins">$302.43</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">52周区间</p>
+                            <p class="text-lg font-bold text-gray-700 font-poppins">$243.53 - $317.90</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-600">年化波动率</p>
+                            <p class="text-xl font-bold text-purple-700 font-poppins">12-18%</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-600">Beta系数</p>
+                            <p class="text-xl font-bold text-purple-700 font-poppins">0.52</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 策略收益对比 -->
+            <div class="card md:col-span-2 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-orange"></div>
+                <div class="relative flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">策略收益对比</h3>
+                    <div class="chart-container">
+                        <canvas id="returnsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 网格策略优势 -->
+            <div class="card md:col-span-2 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">网格策略优势</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">资金门槛低</p>
+                                <p class="text-gray-600">较低资金门槛即可开始操作</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">收益稳定</p>
+                                <p class="text-gray-600">年化收益率6-21%，最大回撤10-15%</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">操作灵活</p>
+                                <p class="text-gray-600">可根据市场波动调整网格参数</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 期权轮策略局限 -->
+            <div class="card md:col-span-2 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-orange"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">期权轮策略局限</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-times-circle text-orange-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">资金门槛高</p>
+                                <p class="text-gray-600">需要较高资金门槛购买100股MCD</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-times-circle text-orange-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">机会成本高</p>
+                                <p class="text-gray-600">在上涨趋势中容易错失收益</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-times-circle text-orange-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">操作复杂</p>
+                                <p class="text-gray-600">需要频繁调整期权合约</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 网格策略参数建议 -->
+            <div class="card md:col-span-3 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-green"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">网格策略参数建议</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <i class="fa-solid fa-layer-group text-3xl text-green-600 mb-2"></i>
+                            <p class="font-bold text-gray-800">网格间距</p>
+                            <p class="text-2xl font-black text-green-700 font-poppins">0.5-1.0%</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <i class="fa-solid fa-money-bill-wave text-3xl text-green-600 mb-2"></i>
+                            <p class="font-bold text-gray-800">缓冲资金</p>
+                            <p class="text-2xl font-black text-green-700 font-poppins">30-40%</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <i class="fa-solid fa-layer-group text-3xl text-green-600 mb-2"></i>
+                            <p class="font-bold text-gray-800">网格层数</p>
+                            <p class="text-2xl font-black text-green-700 font-poppins">15-20层</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 市场表现预测 -->
+            <div class="card md:col-span-1 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">市场表现预测</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">震荡市</span>
+                            <span class="font-bold text-purple-600">优秀</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">上涨趋势</span>
+                            <span class="font-bold text-purple-600">一般</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">下跌趋势</span>
+                            <span class="font-bold text-purple-600">较好</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 策略表现图表 -->
+            <div class="card md:col-span-4 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <div class="relative flex-grow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">不同市场环境下的策略表现</h3>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 操作建议 -->
+            <div class="card md:col-span-4 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-orange"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">操作建议</h3>
+                    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg">
+                        <p class="text-lg font-bold text-orange-800 mb-2">采用0.5-1.0%的网格间距，配合30-40%的缓冲资金，在震荡市中可获得稳定收益。</p>
+                        <p class="text-gray-700">优先选择低佣金券商进行交易，使用限价单而非市价单，设置自动止损，单笔亏损超过2%或总亏损超过10%时暂停策略。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 策略收益对比图表
+    const returnsCtx = document.getElementById('returnsChart').getContext('2d');
+    new Chart(returnsCtx, {
+        type: 'bar',
+        data: {
+            labels: ['网格策略', '期权轮策略'],
+            datasets: [{
+                label: '年化收益率 (%)',
+                data: [13.5, 18],
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.7)',
+                    'rgba(249, 115, 22, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(249, 115, 22, 1)'
+                ],
+                borderWidth: 1
+            }, {
+                label: '最大回撤 (%)',
+                data: [12.5, 18],
+                backgroundColor: [
+                    'rgba(34, 197, 94, 0.7)',
+                    'rgba(239, 68, 68, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(34, 197, 94, 1)',
+                    'rgba(239, 68, 68, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '百分比 (%)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: '网格策略 vs 期权轮策略收益对比'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // 不同市场环境下的策略表现图表
+    const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(performanceCtx, {
+        type: 'radar',
+        data: {
+            labels: ['震荡市表现', '上涨趋势表现', '下跌趋势表现', '资金效率', '操作难度', '风险控制'],
+            datasets: [{
+                label: '网格策略',
+                data: [9, 6, 7, 8, 8, 7],
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+            }, {
+                label: '期权轮策略',
+                data: [7, 5, 6, 5, 5, 6],
+                backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                borderColor: 'rgba(249, 115, 22, 1)',
+                pointBackgroundColor: 'rgba(249, 115, 22, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(249, 115, 22, 1)'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+</html>
