@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVXY合股历史分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">   
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FFFFFF;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+        .highlight-gradient-blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0), rgba(59, 130, 246, 0.05));
+        }
+        .highlight-gradient-red {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0), rgba(239, 68, 68, 0.05));
+        }
+        .highlight-gradient-amber {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0), rgba(245, 158, 11, 0.05));
+        }
+        .highlight-gradient-purple {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0), rgba(168, 85, 247, 0.05));
+        }
+        .highlight-gradient-green {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0), rgba(34, 197, 94, 0.05));
+        }
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #3B82F6, #1E40AF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-red {
+            background: linear-gradient(135deg, #EF4444, #B91C1C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .border-highlight-blue {
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        .border-highlight-red {
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        .border-highlight-amber {
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+        .border-highlight-purple {
+            border-color: rgba(168, 85, 247, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            <!-- 标题卡片 -->
+            <div class="card md:col-span-4 p-8 flex flex-col justify-center items-center text-center">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <h1 class="text-4xl md:text-6xl font-black text-gray-800 mb-4">UVXY合股历史分析报告</h1>
+                <p class="text-xl md:text-2xl font-bold text-gradient-blue font-poppins">12次合股背后的结构性缺陷</p>
+                <p class="mt-6 text-gray-600 max-w-4xl">深入分析UVXY自2011年上市以来的12次合股历史，揭示"合股即下跌"的铁律及其背后的结构性原因</p>
+            </div>
+
+            <!-- 核心观点摘要卡片 -->
+            <div class="card md:col-span-2 p-8 flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-circle-exclamation text-red-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">核心观点摘要</h2>
+                </div>
+                <div class="space-y-4 text-gray-700">
+                    <p><span class="font-bold text-red-600">12次合股</span>：UVXY自2011年上市以来共经历12次合股，比例从1:4到1:10不等</p>
+                    <p><span class="font-bold text-red-600">结构性缺陷</span>：VIX期货的contango结构和杠杆损耗导致价格持续下跌</p>
+                    <p><span class="font-bold text-red-600">合股铁律</span>：每次合股后虽偶有反弹，但长期均延续下跌趋势，最终回到合股前价格区间</p>
+                    <p><span class="font-bold text-red-600">投资建议</span>：强烈不建议长期持有，仅适合短期对冲，持有时间不超过5个交易日</p>
+                </div>
+            </div>
+
+            <!-- 关键数据卡片 -->
+            <div class="card md:col-span-2 p-8 flex flex-col justify-center">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-amber"></div>
+                <div class="grid grid-cols-2 gap-6 text-center">
+                    <div>
+                        <p class="text-5xl font-bold text-gradient-amber font-poppins">12</p>
+                        <p class="mt-2 text-gray-700 font-semibold">总合股次数</p>
+                    </div>
+                    <div>
+                        <p class="text-5xl font-bold text-gradient-amber font-poppins">99.9999%</p>
+                        <p class="mt-2 text-gray-700 font-semibold">累计跌幅(未合股)</p>
+                    </div>
+                    <div>
+                        <p class="text-5xl font-bold text-gradient-amber font-poppins">1.5x</p>
+                        <p class="mt-2 text-gray-700 font-semibold">当前杠杆倍数</p>
+                    </div>
+                    <div>
+                        <p class="text-5xl font-bold text-gradient-amber font-poppins">7-18%</p>
+                        <p class="mt-2 text-gray-700 font-semibold">月均损耗率</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 合股历史时间线图表 -->
+            <div class="card md:col-span-4 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+                <div class="flex items-center mb-6">
+                    <i class="fa-solid fa-timeline text-purple-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">UVXY合股历史时间线</h2>
+                </div>
+                <div class="h-80">
+                    <canvas id="splitTimelineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 产品基本信息卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-info-circle text-blue-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">产品基本信息</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                        <span class="text-gray-600">基金全称</span>
+                        <span class="font-semibold">ProShares Ultra VIX Short-Term Futures ETF</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                        <span class="text-gray-600">上市日期</span>
+                        <span class="font-semibold">2011年10月3日</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                        <span class="text-gray-600">当前杠杆倍数</span>
+                        <span class="font-semibold text-blue-600">1.5倍</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                        <span class="text-gray-600">杠杆调整日期</span>
+                        <span class="font-semibold">2018年2月28日 (从2倍调整)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">跟踪指数</span>
+                        <span class="font-semibold">S&P 500 VIX短期期货指数</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 合股必要性卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-arrows-down-to-line text-red-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">合股的必要性</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-check-circle text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">维持股价在合理交易区间</p>
+                            <p class="text-gray-600 text-sm">避免因股价过低导致的流动性问题</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-check-circle text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">符合交易所上市要求</p>
+                            <p class="text-gray-600 text-sm">防止因股价持续下跌而面临退市风险</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-check-circle text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">降低交易成本</p>
+                            <p class="text-gray-600 text-sm">减少买卖价差占股价的比例，提高交易效率</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 合股后走势特征卡片 -->
+            <div class="card md:col-span-3 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-amber"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-chart-line text-amber-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">合股后走势特征</h2>
+                </div>
+                <div class="h-80">
+                    <canvas id="postSplitChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 合股后关键数据卡片 -->
+            <div class="card md:col-span-1 p-8 flex flex-col justify-center">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-amber"></div>
+                <div class="text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">合股后关键数据</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-3xl font-bold text-gradient-amber font-poppins">20-30%</p>
+                            <p class="text-gray-600 text-sm">合股后1个月平均跌幅</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gradient-amber font-poppins">70-80%</p>
+                            <p class="text-gray-600 text-sm">合股后1年平均跌幅</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gradient-amber font-poppins">90%+</p>
+                            <p class="text-gray-600 text-sm">合股后2年平均跌幅</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 结构性损耗卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-gears text-red-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">结构性损耗分析</h2>
+                </div>
+                <div class="h-80">
+                    <canvas id="decayChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 产品对比卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-blue"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-balance-scale text-blue-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">波动率产品合股对比</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b-2 border-blue-200">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-800">产品</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-800">杠杆倍数</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-800">合股次数</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-800">合股频率</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-800">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-semibold">UVXY</td>
+                                <td class="text-center py-3 px-4">1.5x</td>
+                                <td class="text-center py-3 px-4">12</td>
+                                <td class="text-center py-3 px-4">8-22个月</td>
+                                <td class="text-center py-3 px-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">存续中</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-semibold">TVIX</td>
+                                <td class="text-center py-3 px-4">2x</td>
+                                <td class="text-center py-3 px-4">7</td>
+                                <td class="text-center py-3 px-4">12-18个月</td>
+                                <td class="text-center py-3 px-4"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">已退市</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-semibold">VXX</td>
+                                <td class="text-center py-3 px-4">1x</td>
+                                <td class="text-center py-3 px-4">多次</td>
+                                <td class="text-center py-3 px-4">较低</td>
+                                <td class="text-center py-3 px-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">存续中</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 投资建议卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-green"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-lightbulb text-green-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">投资建议</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <p class="font-bold text-green-800 mb-2">持有时间</p>
+                        <p class="text-green-700">不超过5个交易日，避免长期持有导致的时间价值损耗</p>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <p class="font-bold text-green-800 mb-2">仓位控制</p>
+                        <p class="text-green-700">严格控制在总资产的3%以内，防止极端损失</p>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <p class="font-bold text-green-800 mb-2">止损策略</p>
+                        <p class="text-green-700">单日亏损达到15%时立即平仓，避免损失扩大</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                        <p class="font-bold text-red-800 mb-2">强烈不建议</p>
+                        <p class="text-red-700">将UVXY作为长期投资品种，其存在严重的时间价值损耗</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风险提示卡片 -->
+            <div class="card md:col-span-2 p-8">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-red"></div>
+                <div class="flex items-center mb-4">
+                    <i class="fa-solid fa-shield-halved text-red-500 text-2xl mr-3"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">主要风险提示</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-arrow-down-short-wide text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">归零风险</p>
+                            <p class="text-gray-600 text-sm">UVXY存在明确的归零趋势，长期持有可能导致本金几乎完全损失</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-wave-square text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">高波动性风险</p>
+                            <p class="text-gray-600 text-sm">UVXY的波动性极高，单日涨跌幅经常超过10%，极端情况下可能超过50%</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-arrows-rotate text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">杠杆风险</p>
+                            <p class="text-gray-600 text-sm">1.5倍杠杆放大了收益，但也放大了损失，导致净值快速衰减</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-tags text-red-500 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800">税收风险</p>
+                            <p class="text-gray-600 text-sm">UVXY作为追踪期货的ETF，会发放K-1表格，增加税务申报复杂性</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 总结卡片 -->
+            <div class="card md:col-span-4 p-8 flex flex-col justify-center items-center text-center">
+                <div class="absolute top-0 left-0 w-full h-full highlight-gradient-purple"></div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">总结与展望</h2>
+                <p class="text-lg text-gray-700 max-w-4xl">
+                    UVXY自2011年上市以来的12次合股历史，充分展现了<span class="font-bold text-purple-600">杠杆波动率产品的结构性困境</span>。
+                    作为1.5倍杠杆的VIX短期期货ETF，UVXY面临着期货展期损耗、杠杆损耗和时间价值损耗的三重压力，导致其价格呈现持续下跌趋势。
+                    展望未来，UVXY大概率会继续其合股循环。投资者必须认识到，合股只是<span class="font-bold text-purple-600">技术性调整</span>，无法改变UVXY的根本缺陷。
+                    对于投资者而言，UVXY更适合作为<span class="font-bold text-purple-600">短期投机工具或对冲工具</span>，而非长期投资品种。
+                </p>
+                <p class="mt-6 text-xl font-bold text-gradient-purple">UVXY不是投资品，而是投机工具</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 合股历史时间线图表
+    const splitTimelineCtx = document.getElementById('splitTimelineChart').getContext('2d');
+    const splitTimelineChart = new Chart(splitTimelineCtx, {
+        type: 'line',
+        data: {
+            labels: ['2011-10', '2012-03', '2012-09', '2013-06', '2014-01', '2015-05', '2016-07', '2017-01', '2017-07', '2018-09', '2021-05', '2023-06', '2024-04'],
+            datasets: [{
+                label: '股价 (合股调整后)',
+                data: [40, 33.48, 39.20, 62.50, 61.92, 40.95, 30.05, 30.60, 34.24, 36.80, 38.10, 20.70, 30],
+                borderColor: 'rgba(168, 85, 247, 1)',
+                backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                borderWidth: 3,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(168, 85, 247, 1)',
+                tension: 0.2,
+                fill: true
+            }, {
+                label: '合股事件',
+                data: [null, 33.48, 39.20, 62.50, 61.92, 40.95, 30.05, 30.60, 34.24, 36.80, 38.10, 20.70, 30],
+                borderColor: 'rgba(239, 68, 68, 1)',
+                backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                borderWidth: 0,
+                pointRadius: 8,
+                pointHoverRadius: 10,
+                showLine: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            if (context.datasetIndex === 1) {
+                                const splits = [
+                                    '1:6合股', '1:10合股', '1:10合股', '1:4合股', '1:5合股', 
+                                    '1:5合股', '1:5合股', '1:4合股', '1:5合股', '1:10合股', 
+                                    '1:10合股', '1:5合股'
+                                ];
+                                return splits[context.dataIndex - 1];
+                            }
+                            return context.dataset.label + ': $' + context.parsed.y.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: '股价 (美元)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '时间'
+                    }
+                }
+            }
+        }
+    });
+
+    // 合股后走势特征图表
+    const postSplitCtx = document.getElementById('postSplitChart').getContext('2d');
+    const postSplitChart = new Chart(postSplitCtx, {
+        type: 'line',
+        data: {
+            labels: ['合股日', '1周后', '1个月后', '3个月后', '6个月后', '1年后', '2年后'],
+            datasets: [{
+                label: '2023年6月合股后',
+                data: [20.70, 22.50, 15.00, 10.00, 8.00, 2.00, 0.50],
+                borderColor: 'rgba(239, 68, 68, 1)',
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                borderWidth: 3,
+                pointRadius: 5,
+                tension: 0.2,
+                fill: true
+            }, {
+                label: '2021年5月合股后',
+                data: [38.10, 42.00, 32.00, 25.00, 15.00, 8.00, 3.00],
+                borderColor: 'rgba(59, 130, 246, 1)',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 3,
+                pointRadius: 5,
+                tension: 0.2,
+                fill: true
+            }, {
+                label: '2018年9月合股后',
+                data: [36.80, 38.00, 30.00, 25.00, 18.00, 12.00, 6.00],
+                borderColor: 'rgba(245, 158, 11, 1)',
+                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                borderWidth: 3,
+                pointRadius: 5,
+                tension: 0.2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '股价 (美元)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: '合股后时间'
+                    }
+                }
+            }
+        }
+    });
+
+    // 结构性损耗分析图表
+    const decayCtx = document.getElementById('decayChart').getContext('2d');
+    const decayChart = new Chart(decayCtx, {
+        type: 'bar',
+        data: {
+            labels: ['期货展期损耗', '杠杆损耗', '时间价值损耗'],
+            datasets: [{
+                label: '月均损耗率 (%)',
+                data: [7, 4, 3],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(245, 158, 11, 0.7)',
+                    'rgba(168, 85, 247, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(168, 85, 247, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return '月均损耗率: ' + context.parsed.y + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '月均损耗率 (%)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+</html>
