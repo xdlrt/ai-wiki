@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华泰柏瑞中证红利低波ETF联接(007466)：现金流策略的理想选择</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#059669',
+                        accent: '#dc2626',
+                        neutral: '#6b7280',
+                        'primary-light': '#dbeafe',
+                        'secondary-light': '#d1fae5',
+                        'accent-light': '#fecdd3',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 头部区域 -->
+    <header class="bg-gradient-to-r from-primary to-blue-700 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">华泰柏瑞中证红利低波ETF联接(007466)</h1>
+                <p class="text-xl md:text-2xl opacity-90">现金流策略的理想选择</p>
+                <div class="mt-6 inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
+                    <span class="text-sm font-medium">报告日期：2025年11月7日</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 投资要点摘要 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">投资要点</h2>
+                <div class="bg-gradient-to-r from-primary-light to-blue-50 rounded-xl p-8 shadow-lg">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        华泰柏瑞中证红利低波ETF联接基金(007466)作为市场上知名的"红三傻"场外红利低波基金之一，凭借其<span class="font-semibold text-primary">高股息+低波动</span>的双重特性，展现出<span class="font-semibold text-primary">持续稳定的分红能力</span>和<span class="font-semibold text-primary">较强的抗跌性</span>，是构建长期现金流策略的优质标的。该基金自2019年7月成立以来累计回报达100.76%，年化收益率约14.24%，近三年平均股息率4.97%，显著高于银行理财和国债收益率。基金采用每月分红机制，2024年分红收益率达8.01%，为投资者提供了稳定的现金流入。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关键数据概览 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">关键数据概览</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-md card-hover border-l-4 border-primary">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">成立以来累计回报</p>
+                            <p class="text-2xl font-bold text-primary">100.76%</p>
+                        </div>
+                        <i class="fa fa-line-chart text-3xl text-primary/70"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-md card-hover border-l-4 border-secondary">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">近三年平均股息率</p>
+                            <p class="text-2xl font-bold text-secondary">4.97%</p>
+                        </div>
+                        <i class="fa fa-money text-3xl text-secondary/70"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-md card-hover border-l-4 border-accent">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">2024年分红收益率</p>
+                            <p class="text-2xl font-bold text-accent">8.01%</p>
+                        </div>
+                        <i class="fa fa-calendar-check-o text-3xl text-accent/70"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-md card-hover border-l-4 border-purple-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">基金规模</p>
+                            <p class="text-2xl font-bold text-purple-600">40.96亿元</p>
+                        </div>
+                        <i class="fa fa-building text-3xl text-purple-600/70"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 基金概况 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">基金概况</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">基本信息</h3>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金名称</td>
+                                    <td class="py-3 px-4 text-gray-600">华泰柏瑞中证红利低波ETF联接基金</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金代码</td>
+                                    <td class="py-3 px-4 text-gray-600">007466</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">成立日期</td>
+                                    <td class="py-3 px-4 text-gray-600">2019年7月15日</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金类型</td>
+                                    <td class="py-3 px-4 text-gray-600">股票型指数基金</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金管理人</td>
+                                    <td class="py-3 px-4 text-gray-600">华泰柏瑞基金管理有限公司</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金经理</td>
+                                    <td class="py-3 px-4 text-gray-600">柳军（24年证券从业经历）</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-700">基金规模</td>
+                                    <td class="py-3 px-4 text-gray-600">40.96亿元（截至2025年11月6日）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">投资策略</h3>
+                    <div class="bg-gradient-to-br from-primary-light to-blue-50 rounded-xl p-6">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            该基金采用被动式投资策略，紧密跟踪中证红利低波动指数，追求跟踪偏离度及跟踪误差的最小化。在正常市场情况下，基金与业绩比较基准的日均跟踪偏离度的绝对值不超过0.3%，年跟踪误差不超过4%。
+                        </p>
+                        <div class="bg-white/70 rounded-lg p-4">
+                            <p class="text-sm font-medium text-gray-700 mb-2">业绩比较基准</p>
+                            <p class="text-gray-600">中证红利低波动指数收益率×95%+银行活期存款利率(税后)×5%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 指数分析 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">指数分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">中证红利低波动指数编制规则</h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">1. 样本空间筛选</h4>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mr-2 mt-1"></i>
+                                过去3年连续现金分红且每年税后现金股息率均大于0
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mr-2 mt-1"></i>
+                                过去一年内日均总市值排名在前80%
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mr-2 mt-1"></i>
+                                过去一年内日均成交金额排名在前80%
+                            </li>
+                        </ul>
+                        
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">2. 选样方法</h4>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mr-2 mt-1"></i>
+                                计算过去一年的红利支付率和过去三年的每股股利增长率
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mr-2 mt-1"></i>
+                                剔除支付率过高或为负的证券，以及增长率非正的证券
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mr-2 mt-1"></i>
+                                按平均税后现金股息率降序排名，选取前75只证券作为待选样本
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mr-2 mt-1"></i>
+                                对待选样本按过去一年波动率升序排名，选取前50只证券作为最终指数样本
+                            </li>
+                        </ul>
+                        
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">3. 加权方式与调整频率</h4>
+                        <ul class="text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fa fa-balance-scale text-accent mr-2 mt-1"></i>
+                                采用股息率加权，单个样本权重不超过15%
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-calendar text-accent mr-2 mt-1"></i>
+                                每年12月调整一次成分股
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">指数行业分布</h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="mb-6">
+                            <img src="https://doc.doubao.com/s/03ZeOGwm2EA/" alt="中证红利低波动指数行业分布" class="w-full h-64 object-contain rounded-lg">
+                        </div>
+                        <div class="space-y-3">
+                            <h4 class="text-lg font-semibold text-gray-800">前十大权重股</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">中粮糖业</span>
+                                    <span class="font-medium text-primary">3.12%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">农业银行</span>
+                                    <span class="font-medium text-primary">2.98%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">四川路桥</span>
+                                    <span class="font-medium text-primary">2.85%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">南钢股份</span>
+                                    <span class="font-medium text-primary">2.72%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">南京银行</span>
+                                    <span class="font-medium text-primary">2.68%</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3">前十大权重股累计权重：28.13%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 业绩表现 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">业绩表现</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">历史业绩概览</h3>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <img src="https://doc.doubao.com/s/nV3xcWgdLTA/" alt="华泰柏瑞中证红利低波ETF联接A历史净值走势" class="w-full h-64 object-contain rounded-lg mb-6">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">时间段</th>
+                                    <th class="py-3 px-4 text-right text-sm font-medium text-gray-700">收益率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">近三个月</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">-0.44%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">近六个月</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">5.57%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">近一年</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">20.76%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">近三年</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">36.65%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">近五年</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">75.26%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-gray-600">成立以来</td>
+                                    <td class="py-3 px-4 text-right text-gray-600">88.16%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">与同类基金比较</h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="mb-6">
+                            <canvas id="performanceChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-primary-light rounded-lg">
+                                <span class="font-medium text-primary">华泰柏瑞中证红利低波ETF联接A</span>
+                                <span class="font-bold text-primary">38.69%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <span class="font-medium text-gray-700">创金合信中证红利低波动指数A</span>
+                                <span class="font-bold text-gray-700">38.48%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <span class="font-medium text-gray-700">嘉实沪深300红利低波动ETF联接A</span>
+                                <span class="font-bold text-gray-700">36.76%</span>
+                            </div>
+                            <p class="text-sm text-gray-500 text-center mt-4">近3年累计收益率比较</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">风险调整后收益</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-primary-light to-blue-50 rounded-xl p-6 text-center card-hover">
+                        <i class="fa fa-area-chart text-3xl text-primary mb-3"></i>
+                        <p class="text-sm font-medium text-gray-700 mb-1">近一年波动率</p>
+                        <p class="text-2xl font-bold text-primary">11.61%</p>
+                        <p class="text-xs text-gray-500 mt-1">优于99%同类基金</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-secondary-light to-green-50 rounded-xl p-6 text-center card-hover">
+                        <i class="fa fa-line-chart text-3xl text-secondary mb-3"></i>
+                        <p class="text-sm font-medium text-gray-700 mb-1">最大回撤</p>
+                        <p class="text-2xl font-bold text-secondary">6.87%</p>
+                        <p class="text-xs text-gray-500 mt-1">优于99%同类基金</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-accent-light to-red-50 rounded-xl p-6 text-center card-hover">
+                        <i class="fa fa-trophy text-3xl text-accent mb-3"></i>
+                        <p class="text-sm font-medium text-gray-700 mb-1">夏普比率</p>
+                        <p class="text-2xl font-bold text-accent">0.82</p>
+                        <p class="text-xs text-gray-500 mt-1">优于30%同类基金</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 分红政策 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">分红政策</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">分红历史与频率</h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="mb-6">
+                            <img src="https://doc.doubao.com/s/jVE70Px-B60/" alt="红利低波ETF分红情况" class="w-full h-48 object-contain rounded-lg">
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 bg-secondary-light rounded-lg">
+                                <i class="fa fa-calendar-check-o text-secondary mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-secondary">连续分红</p>
+                                    <p class="text-sm text-gray-600">连续18个月分红，累计分红金额达2.13亿元</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-primary-light rounded-lg">
+                                <i class="fa fa-clock-o text-primary mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-primary">分红频率</p>
+                                    <p class="text-sm text-gray-600">每月分红，2024年分红12次</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-accent-light rounded-lg">
+                                <i class="fa fa-money text-accent mr-3"></i>
+                                <div>
+                                    <p class="font-medium text-accent">最新分红</p>
+                                    <p class="text-sm text-gray-600">2025年11月6日，每份分红0.0050元</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">分红收益分析</h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="mb-6">
+                            <canvas id="dividendChart" width="400" height="250"></canvas>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-secondary pl-4">
+                                <p class="font-semibold text-secondary">2024年分红收益率</p>
+                                <p class="text-2xl font-bold text-secondary mb-1">8.01%</p>
+                                <p class="text-sm text-gray-600">A类份额</p>
+                            </div>
+                            <div class="border-l-4 border-primary pl-4">
+                                <p class="font-semibold text-primary">近三年平均股息率</p>
+                                <p class="text-2xl font-bold text-primary mb-1">4.97%</p>
+                                <p class="text-sm text-gray-600">显著高于银行理财和国债收益率</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm font-medium text-gray-700 mb-2">投资示例</p>
+                                <p class="text-sm text-gray-600">如果年初投资10万元，每月可获得约625元现金分红，一年累计7500元</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 费率结构 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">费率结构</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-primary-light to-blue-50 rounded-xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                                <i class="fa fa-cogs text-2xl text-primary"></i>
+                            </div>
+                            <p class="text-sm font-medium text-gray-700 mb-1">管理费</p>
+                            <p class="text-xl font-bold text-primary">0.50%</p>
+                            <p class="text-xs text-gray-500">每年</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                                <i class="fa fa-bank text-2xl text-secondary"></i>
+                            </div>
+                            <p class="text-sm font-medium text-gray-700 mb-1">托管费</p>
+                            <p class="text-xl font-bold text-secondary">0.10%</p>
+                            <p class="text-xs text-gray-500">每年</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                                <i class="fa fa-shopping-cart text-2xl text-accent"></i>
+                            </div>
+                            <p class="text-sm font-medium text-gray-700 mb-1">申购费</p>
+                            <p class="text-xl font-bold text-accent">0.12%</p>
+                            <p class="text-xs text-gray-500">优惠后费率</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                                <i class="fa fa-calculator text-2xl text-purple-600"></i>
+                            </div>
+                            <p class="text-sm font-medium text-gray-700 mb-1">综合费率</p>
+                            <p class="text-xl font-bold text-purple-600">0.67%</p>
+                            <p class="text-xs text-gray-500">年化估算</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">赎回费率详情</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">持有期限</th>
+                                    <th class="py-3 px-4 text-right text-sm font-medium text-gray-700">赎回费率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">持有期限&lt;7日</td>
+                                    <td class="py-3 px-4 text-right text-accent font-medium">1.50%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">7日≤持有期限&lt;365日</td>
+                                    <td class="py-3 px-4 text-right text-accent font-medium">0.50%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-600">365日≤持有期限&lt;730日</td>
+                                    <td class="py-3 px-4 text-right text-accent font-medium">0.25%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-gray-600">持有期限≥730日</td>
+                                    <td class="py-3 px-4 text-right text-secondary font-medium">0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">注：基金财产中投资于目标ETF的部分不收取管理费和托管费，因此实际承担的运作综合费率可能低于测算值。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 红利低波策略的理论基础 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">红利低波策略的理论基础与市场有效性</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl p-8 shadow-md mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">学术研究支持</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-primary pl-4">
+                            <p class="font-semibold text-primary mb-2">红利因子的重要性</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                燕翔(2020)的研究指出，股息红利在股票总回报中占据重要地位，美股市场中标普500指数中股息红利及其再投资收益占到指数全收益的接近一半。高股息红利是企业盈利能力持续稳定较高的重要信号。
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-secondary pl-4">
+                            <p class="font-semibold text-secondary mb-2">红利低波策略在中国市场的有效性</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Xiaoya Qu等(2019)的研究表明，在中国A股大盘股市场中，红利和低波动是两个能够提供因子风险溢价的知名风险因子。从高股息率投资组合中排除高波动性股票可能进一步降低投资组合波动性，并在风险调整基础上提高投资组合回报。
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-accent pl-4">
+                            <p class="font-semibold text-accent mb-2">低波动率策略在中国市场的有效性</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                李天乐(2020)的研究发现中国A股市场存在明显的低波动率效应，波动率越低的股票可以获得越高的未来收益。低波动率股票在市场下跌时起到一定程度的保护作用。
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-purple-600 pl-4">
+                            <p class="font-semibold text-purple-600 mb-2">红利低波策略的长期有效性</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                段辰菊和刘阳(2024)的研究表明，历史经验显示红利低波资产长周期取得超额收益的胜率很高。监管政策更加注重保护投资者利益，分红比例不断提升，长线资金力量壮大，这都会增加红利低波资产的吸引力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-primary-light to-blue-50 rounded-xl p-8">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">红利低波策略的优势</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white/70 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2 flex items-center">
+                                <i class="fa fa-check-circle mr-2"></i>红利因子
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                筛选出具有稳定分红能力的优质企业，这些企业通常业绩稳定、现金流充裕、估值合理。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white/70 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary mb-2 flex items-center">
+                                <i class="fa fa-shield mr-2"></i>低波动因子
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                在红利因子基础上，进一步筛选出股价波动较小的股票，降低投资组合的整体风险。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white/70 rounded-lg p-4 md:col-span-2">
+                            <h4 class="font-semibold text-accent mb-2 flex items-center">
+                                <i class="fa fa-balance-scale mr-2"></i>双重优势结合
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                这两个因子的结合使得红利低波策略在不同市场环境中表现出"进可攻，退可守"的特点。在市场上涨时，高股息股票能够提供稳定的分红收益；在市场下跌时，低波动特性能够有效控制回撤，保护投资者资产。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 投资建议 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">投资建议</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-primary-light to-blue-50 rounded-xl p-6 card-hover">
+                    <div class="text-center mb-4">
+                        <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                            <i class="fa fa-users text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">适合的投资者群体</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mr-2 mt-1"></i>
+                            <span>追求稳定现金流的投资者</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mr-2 mt-1"></i>
+                            <span>长期投资者</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mr-2 mt-1"></i>
+                            <span>风险偏好较低的投资者</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mr-2 mt-1"></i>
+                            <span>寻求资产配置多元化的投资者</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-secondary-light to-green-50 rounded-xl p-6 card-hover">
+                    <div class="text-center mb-4">
+                        <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                            <i class="fa fa-lightbulb-o text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">投资策略建议</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mr-2 mt-1"></i>
+                            <span>采用定期定额投资策略</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mr-2 mt-1"></i>
+                            <span>长期持有以享受复利效应</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mr-2 mt-1"></i>
+                            <span>选择红利再投资方式</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mr-2 mt-1"></i>
+                            <span>配置20%-40%的资产比例</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-accent-light to-red-50 rounded-xl p-6 card-hover">
+                    <div class="text-center mb-4">
+                        <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3 shadow-md">
+                            <i class="fa fa-exclamation-triangle text-2xl text-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">风险提示</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-warning text-accent mr-2 mt-1"></i>
+                            <span>股票市场波动风险</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-warning text-accent mr-2 mt-1"></i>
+                            <span>行业集中度风险</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-warning text-accent mr-2 mt-1"></i>
+                            <span>利率变动风险</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-warning text-accent mr-2 mt-1"></i>
+                            <span>流动性风险</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结论 -->
+    <section class="py-12 bg-gradient-to-r from-primary to-blue-700 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 text-center">结论</h2>
+            
+            <div class="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-8">
+                <p class="text-lg leading-relaxed text-center mb-6">
+                    华泰柏瑞中证红利低波ETF联接基金(007466)凭借其<span class="font-semibold text-yellow-300">高股息+低波动</span>的双重特性，<span class="font-semibold text-yellow-300">稳定的分红政策</span>，<span class="font-semibold text-yellow-300">长期稳健的业绩表现</span>，以及<span class="font-semibold text-yellow-300">科学的指数编制规则</span>，是构建长期现金流策略的理想选择。
+                </p>
+                <p class="text-lg leading-relaxed text-center">
+                    基金适合<span class="font-semibold text-yellow-300">持续投入和长期持有</span>，特别适合追求稳定现金流的投资者、长期投资者和风险偏好较低的投资者。建议投资者结合自身的风险偏好和投资目标，将该基金纳入长期投资组合，采用定期定额投资策略，享受复利增长的效应。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <div class="py-8 bg-gray-800 text-white text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-sm opacity-75">
+                本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。
+            </p>
+            <p class="text-xs opacity-50 mt-2">
+                © 2025 投资研究报告 | 数据来源：公开资料整理
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 性能图表
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['华泰柏瑞中证红利低波ETF联接A', '创金合信中证红利低波动指数A', '嘉实沪深300红利低波动ETF联接A'],
+                datasets: [{
+                    label: '近3年累计收益率(%)',
+                    data: [38.69, 38.48, 36.76],
+                    backgroundColor: [
+                        'rgba(30, 64, 175, 0.8)',
+                        'rgba(5, 150, 105, 0.8)',
+                        'rgba(220, 38, 38, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(30, 64, 175, 1)',
+                        'rgba(5, 150, 105, 1)',
+                        'rgba(220, 38, 38, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 分红图表
+        const dividendCtx = document.getElementById('dividendChart').getContext('2d');
+        new Chart(dividendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: '分红收益率(%)',
+                    data: [3.2, 4.1, 5.8, 6.9, 8.01],
+                    fill: true,
+                    backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                    borderColor: 'rgba(5, 150, 105, 1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有卡片元素
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

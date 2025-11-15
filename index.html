@@ -104,6 +104,22 @@
                 category: 'Investment',
                 tags: ['ETF','S&P500','VOO','SPY'],
                 updatedAt: '2025-11'
+            },
+            {
+                title: 'SGOV 投资分析',
+                desc: '超短期美国国债 ETF 的长期持有价值',
+                href: 'investment/sgov/sgov.html',
+                category: 'Investment',
+                tags: ['ETF','美国国债','SGOV','现金管理'],
+                updatedAt: '2025-11'
+            },
+            {
+                title: '华泰柏瑞中证红利低波 ETF 联接',
+                desc: '现金流策略的理想选择，高股息 + 低波动双重特性',
+                href: 'investment/007466/007466.html',
+                category: 'Investment',
+                tags: ['ETF','红利低波','007466','现金流'],
+                updatedAt: '2025-11'
             }
         ];
 
@@ -118,23 +134,23 @@
             list.forEach((item, idx) => {
                 const a = document.createElement('a');
                 a.href = item.href;
-                a.className = 'block bg-white rounded-xl shadow-lg p-6 card-hover focus:outline-none focus:ring-2 focus:ring-primary';
+                a.className = 'block bg-white rounded-lg border border-gray-200 shadow-sm p-6 card-hover focus:outline-none focus:ring-2 focus:ring-primary';
                 a.setAttribute('aria-label', item.title);
                 a.setAttribute('tabindex', '0');
 
                 const tags = item.tags.map(t => `<button type="button" class="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded" data-tag="${t}">${t}</button>`).join(' ');
                 a.innerHTML = `
-                    <div class="flex items-start mb-4">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4"><i class="fas fa-file-lines text-blue-600 text-xl"></i></div>
+                    <div class="flex items-start mb-3">
+                        <div class="bg-blue-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center"><i class="fas fa-file-lines text-blue-600 text-base"></i></div>
                         <div>
                             <h3 class="text-xl font-bold text-gray-900">${item.title}</h3>
-                            <p class="text-gray-600 mt-1">${item.desc}</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between">
+                    <p class="text-gray-600 mb-4">${item.desc}</p>
+                    <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center space-x-2">${tags}</div>
-                        <div class="text-gray-500 text-sm">更新：${item.updatedAt}</div>
                     </div>
+                    <div class="text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2">更新时间：${item.updatedAt}</div>
                 `;
                 cardsEl.appendChild(a);
             });

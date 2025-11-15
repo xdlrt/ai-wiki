@@ -1,0 +1,1417 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGOV投资分析：超短期美国国债ETF的长期持有价值（补充版）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa',
+                        neutral: '#f3f4f6',
+                        dark: '#1f2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            }
+            .transition-all-300 {
+                transition: all 300ms ease-in-out;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa fa-line-chart text-primary text-2xl mr-3"></i>
+                        <span class="font-bold text-xl text-gray-900">投资分析报告</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#summary" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">核心观点</a>
+                    <a href="#overview" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">产品概况</a>
+                    <a href="#dividend" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">股息分红</a>
+                    <a href="#comparison" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">同类比较</a>
+                    <a href="#strategy" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">持有策略</a>
+                    <a href="#conclusion" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">投资建议</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button text-gray-700 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#summary" class="block px-3 py-2 text-gray-700 hover:text-primary">核心观点</a>
+                <a href="#overview" class="block px-3 py-2 text-gray-700 hover:text-primary">产品概况</a>
+                <a href="#dividend" class="block px-3 py-2 text-gray-700 hover:text-primary">股息分红</a>
+                <a href="#comparison" class="block px-3 py-2 text-gray-700 hover:text-primary">同类比较</a>
+                <a href="#strategy" class="block px-3 py-2 text-gray-700 hover:text-primary">持有策略</a>
+                <a href="#conclusion" class="block px-3 py-2 text-gray-700 hover:text-primary">投资建议</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 标题区域 -->
+    <header class="bg-gradient-primary text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">SGOV投资分析报告</h1>
+                <p class="text-xl md:text-2xl opacity-90 mb-4">超短期美国国债ETF的长期持有价值（补充版）</p>
+                <p class="text-lg opacity-80 mb-8">重点补充股息分红分析与同类产品对比</p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fa fa-calendar mr-2"></i>2025年11月
+                    </span>
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fa fa-tag mr-2"></i>ETF投资
+                    </span>
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fa fa-shield mr-2"></i>低风险
+                    </span>
+                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fa fa-money mr-2"></i>分红分析
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 核心观点摘要 -->
+    <section id="summary" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">核心观点摘要</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">投资评级：买入</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            SGOV (iShares 0-3 Month Treasury Bond ETF) 是一款由贝莱德发行的超短期美国国债ETF，专注于投资剩余期限不超过3个月的美国国债。基于当前市场环境、产品特性及未来展望，我们认为SGOV适合作为投资组合的<strong>长期配置工具</strong>。
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fa fa-check-circle text-green-500 mr-3"></i>
+                                <span class="text-gray-700">极低的信用风险和利率风险</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-check-circle text-green-500 mr-3"></i>
+                                <span class="text-gray-700">费率低廉(0.09%)，长期持有成本优势明显</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-check-circle text-green-500 mr-3"></i>
+                                <span class="text-gray-700">每月稳定分红，当前收益率4.27%-5.18%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-check-circle text-green-500 mr-3"></i>
+                                <span class="text-gray-700">美国国债利息免除州和地方税，税务优势突出</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://doc.doubao.com/s/djv9IYWtZBs/" alt="多元化投资组合" class="rounded-xl shadow-lg mx-auto max-w-full h-64 object-cover">
+                        <p class="text-sm text-gray-600 mt-3">SGOV作为多元化投资组合的重要组成部分</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关键指标卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fa fa-dollar text-blue-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">当前收益率</p>
+                            <p class="text-2xl font-bold text-gray-900">4.27%-5.18%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fa fa-percent text-green-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">费用率</p>
+                            <p class="text-2xl font-bold text-gray-900">0.09%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fa fa-bank text-purple-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">资产规模</p>
+                            <p class="text-2xl font-bold text-gray-900">591.5亿</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fa fa-calendar text-orange-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">成立时间</p>
+                            <p class="text-2xl font-bold text-gray-900">2020</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fa fa-refresh text-red-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">分红频率</p>
+                            <p class="text-2xl font-bold text-gray-900">每月</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品基本概况 -->
+    <section id="overview" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">产品基本概况</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">产品定义与结构</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                            <h4 class="font-semibold text-gray-900 mb-2">基本信息</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex justify-between">
+                                    <span>发行方</span>
+                                    <span class="font-medium">贝莱德(BlackRock)旗下iShares</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>成立日期</span>
+                                    <span class="font-medium">2020年5月26日</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>交易代码</span>
+                                    <span class="font-medium">SGOV</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>交易场所</span>
+                                    <span class="font-medium">纽约证券交易所Arca</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                            <h4 class="font-semibold text-gray-900 mb-2">投资策略</h4>
+                            <p class="text-gray-700">
+                                跟踪ICE 0-3 Month US Treasury Securities Index指数，至少将80%的资产投资于标的指数成分证券，至少90%的资产投资于美国国债。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <img src="https://doc.doubao.com/s/79EhR33kOrE/" alt="美国国债" class="rounded-xl shadow-lg mx-auto max-w-full h-80 object-cover">
+                    <p class="text-sm text-gray-600 mt-3">SGOV主要投资于美国短期国债</p>
+                </div>
+            </div>
+
+            <!-- 持仓构成 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">持仓构成分析</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">资产配置</h4>
+                        <canvas id="assetAllocationChart" width="400" height="300"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">投资特点</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-clock-o text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">期限结构</h5>
+                                    <p class="text-gray-700 text-sm">专注于剩余期限0-3个月的美国国债，久期接近零</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-shield text-green-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">信用质量</h5>
+                                    <p class="text-gray-700 text-sm">仅投资于美国国债，信用风险几乎为零</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-pie-chart text-purple-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">持仓集中度</h5>
+                                    <p class="text-gray-700 text-sm">前五大持仓占比约48.08%，分散度适中</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 股息与分红分析 -->
+    <section id="dividend" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">股息与分红分析</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <!-- 分红政策与历史 -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">分红政策与历史</h3>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6">
+                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fa fa-calendar-check-o text-green-600 mr-2"></i>
+                                分红频率与方式
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• SGOV采用每月派息的方式，为投资者提供稳定的现金流</li>
+                                <li>• 分红通常在每月第一个工作日左右宣布，随后几天内支付</li>
+                                <li>• 最近一次分红为2025年10月6日，每股派息$0.3466</li>
+                                <li>• 除息日通常为每月第一个工作日，如2025年10月1日</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6">
+                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fa fa-line-chart text-blue-600 mr-2"></i>
+                                分红历史增长
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 2022年初，每月分红仅为$0.002左右</li>
+                                <li>• 到2023年中期，分红金额增长至每月$0.392左右</li>
+                                <li>• 2024年期间，分红金额稳定在每月$0.40-$0.45之间</li>
+                                <li>• 2025年以来，分红金额略有下降，目前稳定在每月$0.34-$0.37之间</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-6">
+                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                <i class="fa fa-money text-purple-600 mr-2"></i>
+                                年化分红与收益率
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 当前年化分红约为$4.29-$5.20每股</li>
+                                <li>• 最新股息收益率为4.27%-5.18%（截至2025年11月）</li>
+                                <li>• 分红收益率高于大多数货币市场基金和储蓄账户</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">分红历史图表</h3>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <canvas id="dividendHistoryChart" width="400" height="300"></canvas>
+                    </div>
+                    
+                    <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="font-semibold text-gray-900 mb-4">最新分红信息</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">最近分红日期</span>
+                                <span class="font-medium text-gray-900">2025年10月6日</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">最近分红金额</span>
+                                <span class="font-medium text-green-600">$0.3466/股</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">除息日期</span>
+                                <span class="font-medium text-gray-900">2025年10月1日</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">年化分红</span>
+                                <span class="font-medium text-gray-900">$4.29-$5.20/股</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-700">股息收益率</span>
+                                <span class="font-medium text-green-600">4.27%-5.18%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分红税务处理 -->
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">分红税务处理</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-4">美国国内投资者税务处理</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-blue-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">美国国债利息收入免除州和地方税，这是SGOV的重要税务优势</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-blue-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">利息收入需缴纳联邦所得税，按普通收入税率计算</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-blue-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">资本利得按持有期限适用短期或长期资本利得税率</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-4">非美国投资者税务处理</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">对于非美国税务居民，美国通常对股息征收30%的预扣税</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">根据中美税务协定，中国投资者的股息税率为10%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa fa-info text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 text-sm">非美国税务居民不需要缴纳美国资本利得税</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 与其他国债ETF对比分析 -->
+    <section id="comparison" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">与其他国债ETF对比分析</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <!-- 主要竞争对手比较表格 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-12">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">产品名称</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">代码</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">期限范围</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">费率</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">股息收益率</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">资产规模</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">1年总回报</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="bg-blue-50 border-l-4 border-blue-500">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">iShares 0-3 Month Treasury Bond ETF</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-semibold text-blue-600">SGOV</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">0-3个月</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        0.09%
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">4.27%-5.18%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$591.5B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-green-600 font-medium">5.13%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">SPDR Bloomberg 1-3 Month T-Bill ETF</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">BIL</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">1-3个月</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">0.14%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">5.02%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$369.9B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">5.05%</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">Vanguard Short-Term Treasury Index Fund ETF</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">VGSH</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">1-3年</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        0.04%
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">未明确</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$247.3B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">5.14%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">iShares Short Treasury Bond ETF</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">SHV</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">1年以内</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">0.15%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">未明确</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$206.7B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">3.98%</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">JPMorgan Ultra-Short Income ETF</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">JPST</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">0-1年</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">0.18%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">未明确</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">$342.7B</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">5.11%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 关键指标对比图表 -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">费率与收益率对比</h3>
+                    <canvas id="feeYieldChart" width="400" height="300"></canvas>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">资产规模对比</h3>
+                    <canvas id="assetSizeChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- 优劣势分析 -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fa fa-plus-circle text-green-500 mr-2"></i>
+                        SGOV的主要优势
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-trophy text-green-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">费率优势</h4>
+                                <p class="text-gray-700 text-sm">0.09%的费率低于大多数竞争对手，长期持有成本优势明显</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-clock-o text-blue-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">期限最短</h4>
+                                <p class="text-gray-700 text-sm">0-3个月的期限结构使其利率风险最低，净值稳定性最高</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-bank text-purple-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">规模最大</h4>
+                                <p class="text-gray-700 text-sm">约591.5亿美元的资产规模提供了更好的流动性和市场深度</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-money text-orange-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">分红稳定</h4>
+                                <p class="text-gray-700 text-sm">每月稳定派息，为投资者提供可预期的现金流</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fa fa-minus-circle text-red-500 mr-2"></i>
+                        SGOV的相对劣势
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-arrow-down text-red-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">收益率不是最高</h4>
+                                <p class="text-gray-700 text-sm">虽然收益率具有竞争力，但不是同类产品中最高的</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-line-chart text-red-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">利率上升敏感性</h4>
+                                <p class="text-gray-700 text-sm">在利率上升周期，由于期限极短，无法充分享受利率上升带来的收益提升</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-thermometer-full text-red-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">通胀风险</h4>
+                                <p class="text-gray-700 text-sm">如果通胀率持续高于收益率，实际购买力可能下降</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fa fa-bullseye text-red-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">长期收益有限</h4>
+                                <p class="text-gray-700 text-sm">相比风险更高的资产类别，长期复合收益率相对较低</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 长期持有策略建议 -->
+    <section id="strategy" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">长期持有策略建议</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <!-- 基于分红特性的持有策略 -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-bullseye text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">定期再投资策略</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>将每月分红自动再投资于SGOV，通过复利效应增强长期回报</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>特别适合不需要当期收入的投资者，如退休规划者</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>复利效应在长期持有期间尤为显著，可显著提升最终资产价值</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-money text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">分红现金流管理</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-blue-500 mr-2 mt-1"></i>
+                            <span>对于需要当期收入的投资者，如退休人员，可将SGOV的月度分红作为稳定的现金流来源</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-blue-500 mr-2 mt-1"></i>
+                            <span>结合其他收入来源，构建多元化的退休收入组合</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-blue-500 mr-2 mt-1"></i>
+                            <span>由于分红金额相对稳定，便于进行预算规划和支出管理</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-calculator text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">税务优化策略</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple-500 mr-2 mt-1"></i>
+                            <span>美国投资者可将SGOV配置在应税账户中，充分利用州和地方税豁免优势</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple-500 mr-2 mt-1"></i>
+                            <span>非美国投资者应了解并申请适用的税务协定优惠税率，如中国投资者的10%税率</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple-500 mr-2 mt-1"></i>
+                            <span>考虑在税率变化前调整持仓，优化税务结果</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 资产配置建议 -->
+            <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 mb-16">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">资产配置建议</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-shield text-red-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">保守型投资者</h4>
+                        <p class="text-2xl font-bold text-red-600 mb-2">20%-30%</p>
+                        <p class="text-sm text-gray-600">作为核心现金管理工具，提供稳定性和流动性</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-balance-scale text-yellow-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">平衡型投资者</h4>
+                        <p class="text-2xl font-bold text-yellow-600 mb-2">10%-15%</p>
+                        <p class="text-sm text-gray-600">作为流动性储备和投资组合稳定剂</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-rocket text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">积极型投资者</h4>
+                        <p class="text-2xl font-bold text-green-600 mb-2">5%-10%</p>
+                        <p class="text-sm text-gray-600">作为现金管理工具，保持足够流动性</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-wheelchair text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">退休投资者</h4>
+                        <p class="text-2xl font-bold text-blue-600 mb-2">按需配置</p>
+                        <p class="text-sm text-gray-600">作为固定收益来源的一部分，提供稳定收入</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 市场环境适应性策略 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">市场环境适应性策略</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-green-500 bg-green-50 p-6 rounded-r-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                <i class="fa fa-arrow-up text-green-600 mr-2"></i>
+                                利率上升环境
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 在利率上升周期，SGOV的收益率会迅速反映新的利率水平</li>
+                                <li>• 由于期限极短，债券会快速滚动到新的、收益率更高的债券</li>
+                                <li>• 这种环境下，SGOV的收益率优势会逐渐显现</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-500 bg-blue-50 p-6 rounded-r-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                <i class="fa fa-arrow-down text-blue-600 mr-2"></i>
+                                利率下降环境
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 在利率下降周期，SGOV的收益率会随市场利率下降而降低</li>
+                                <li>• 但由于期限极短，本金价值波动风险远低于长期债券</li>
+                                <li>• 可考虑在利率下降初期适当减持SGOV，转向期限稍长的债券ETF</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-yellow-500 bg-yellow-50 p-6 rounded-r-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                <i class="fa fa-warning text-yellow-600 mr-2"></i>
+                                市场动荡时期
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 在股市波动或经济不确定性增加时期，SGOV通常表现出避险特性</li>
+                                <li>• 资金往往从风险资产流向安全的国债，推动SGOV价格上涨</li>
+                                <li>• 这种环境下，可适当提高SGOV的配置比例，增强投资组合稳定性</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-red-500 bg-red-50 p-6 rounded-r-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                <i class="fa fa-fire text-red-600 mr-2"></i>
+                                通胀上升时期
+                            </h4>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• 如果通胀率持续高于SGOV的收益率，实际购买力可能下降</li>
+                                <li>• 可考虑将部分资金配置于通胀保值资产，如TIPS(通胀保值国债)</li>
+                                <li>• 保持SGOV作为流动性储备，同时通过其他资产类别应对通胀风险</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 风险因素与注意事项 -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">风险因素与注意事项</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">与分红相关的风险</h3>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-red-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-red-800">分红金额波动风险</h4>
+                                    <p class="text-sm text-red-700">SGOV的分红金额与短期利率水平直接相关，利率下降可能导致分红减少。历史数据显示，分红金额可能出现波动，如2025年以来的分红金额较2024年有所下降</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-yellow-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-yellow-800">再投资风险</h4>
+                                    <p class="text-sm text-yellow-700">在利率下降环境中，将分红再投资可能面临收益率下降的风险。再投资的新份额将获得更低的收益率，影响整体投资组合的平均收益率</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-orange-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-orange-800">税务政策变化风险</h4>
+                                    <p class="text-sm text-orange-700">美国税法可能发生变化，影响SGOV的税务处理方式。州和地方税豁免优势可能面临挑战或调整。美中税务协定可能发生变化，影响中国投资者的股息税率</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">市场与经济风险</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-blue-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-blue-800">利率风险</h4>
+                                    <p class="text-sm text-blue-700">尽管SGOV的期限极短，利率风险相对较低，但仍存在一定的利率敏感性。如果利率快速上升，现有债券的市场价值可能短暂下降</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 border-l-4 border-purple-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-purple-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-purple-800">通胀风险</h4>
+                                    <p class="text-sm text-purple-700">如果通胀率持续高于SGOV的收益率，实际购买力可能下降。当前美国通胀率约为3%，SGOV的收益率约为4.27%-5.18%，实际收益率为正值但不高</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-exclamation-triangle text-indigo-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-indigo-800">流动性风险</h4>
+                                    <p class="text-sm text-indigo-700">虽然SGOV通常具有良好的流动性，但在极端市场条件下，流动性可能下降。买卖价差可能扩大，影响交易成本和执行价格</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 投资者适配性分析 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">投资者适配性分析</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                            <i class="fa fa-thumbs-up text-green-500 mr-2"></i>
+                            SGOV特别适合以下投资者
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-money text-green-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">现金管理需求者</h5>
+                                    <p class="text-gray-700 text-sm">需要高流动性、低风险的现金管理工具的投资者，企业资金管理者和短期闲置资金管理者</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-calendar-check-o text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">收入导向型投资者</h5>
+                                    <p class="text-gray-700 text-sm">寻求稳定月度收入的投资者，如退休人员，依赖投资收入覆盖生活开支的投资者</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-calculator text-purple-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">税务敏感型投资者</h5>
+                                    <p class="text-gray-700 text-sm">高税率州的投资者，可充分利用SGOV的州税豁免优势，非美国投资者可享受优惠股息税率</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-shield text-yellow-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">风险厌恶型投资者</h5>
+                                    <p class="text-gray-700 text-sm">追求本金安全与稳定收益的保守型投资者，临近退休或已退休，风险承受能力较低的投资者</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                            <i class="fa fa-thumbs-down text-red-500 mr-2"></i>
+                            不太适合以下投资者
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-arrow-up text-red-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">高收益追求者</h5>
+                                    <p class="text-gray-700 text-sm">期望获得显著高于市场平均水平收益的投资者，具有高风险承受能力，追求资本增值的投资者</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-fire text-orange-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900">通胀对冲需求者</h5>
+                                    <p class="text-gray-700 text-sm">主要关注通胀对冲的投资者，担心通胀侵蚀购买力的长期投资者，这些投资者可能需要配置更多通胀保值资产</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结论与投资建议 -->
+    <section id="conclusion" class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">结论与投资建议</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">综合评估</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-check text-green-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">适合长期持有</h4>
+                                    <p class="text-gray-700 text-sm">SGOV作为超短期美国国债ETF，非常适合作为投资组合的长期配置工具，特别是作为现金管理和低风险资产的核心组成部分。其每月稳定的分红、极低的信用风险和高流动性使其成为长期持有的理想选择</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-money text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">分红特性优异</h4>
+                                    <p class="text-gray-700 text-sm">SGOV的每月分红提供了稳定的现金流，当前股息收益率为4.27%-5.18%，高于大多数货币市场基金和储蓄账户。分红金额自2022年以来总体呈上升趋势，反映了美联储加息周期的积极影响</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-trophy text-purple-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">竞争优势明显</h4>
+                                    <p class="text-gray-700 text-sm">相比主要竞争对手，SGOV在费率(0.09%)、资产规模($591.5B)和流动性方面具有明显优势。虽然收益率不是最高的，但综合考虑风险、成本和流动性，SGOV提供了极具吸引力的风险调整后收益</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fa fa-percent text-orange-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">税务优势突出</h4>
+                                    <p class="text-gray-700 text-sm">美国国债利息免除州和地方税的特性，以及对中国投资者10%的优惠股息税率，显著提高了SGOV的税后收益率，增强了其长期持有价值</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 具体投资建议 -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-pie-chart text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">核心配置建议</h3>
+                    <ul class="text-sm text-gray-700 space-y-2 text-left">
+                        <li>• 将SGOV作为投资组合的核心现金管理工具，长期持有</li>
+                        <li>• 根据个人风险偏好配置5%-30%的资产</li>
+                        <li>• 结合其他期限债券ETF，构建完整的债券投资组合</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-refresh text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">分红策略建议</h3>
+                    <ul class="text-sm text-gray-700 space-y-2 text-left">
+                        <li>• 不需要当期收入的投资者可将分红自动再投资</li>
+                        <li>• 需要当期收入的投资者可将分红作为现金流来源</li>
+                        <li>• 定期评估分红再投资与现金提取的权衡</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-shield text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">风险控制建议</h3>
+                    <ul class="text-sm text-gray-700 space-y-2 text-left">
+                        <li>• 不要将SGOV作为唯一的长期投资工具</li>
+                        <li>• 密切关注通胀数据和利率环境变化</li>
+                        <li>• 根据流动性需求合理设定持有比例</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 未来展望 -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
+                <h3 class="text-2xl font-bold mb-8 text-center">未来展望</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-university text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">利率环境变化</h4>
+                        <p class="text-sm opacity-90">美联储未来降息路径将直接影响SGOV的收益率水平。预计随着利率逐步下降，SGOV收益率可能有所回落，但仍将保持相对稳定</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-bullseye text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">经济周期演变</h4>
+                        <p class="text-sm opacity-90">在经济不确定性增加时期，SGOV可能吸引更多避险资金流入；在经济强劲复苏时期，其相对吸引力可能下降</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-money text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">分红趋势展望</h4>
+                        <p class="text-sm opacity-90">SGOV的分红金额将随市场利率变化而调整。如果美联储继续降息，分红金额可能进一步下降，但仍将保持相对稳定</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-lg font-medium">
+                        总体而言，SGOV作为一款低风险、高流动性、费率低廉且分红稳定的超短期美国国债ETF，将继续在投资者的资产配置中扮演重要角色，特别适合作为长期持有的现金管理工具和低风险资产配置。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fa fa-line-chart text-blue-400 text-2xl mr-3"></i>
+                    <span class="font-bold text-xl">投资分析报告</span>
+                </div>
+                <p class="text-gray-400 mb-6">本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+                <div class="flex justify-center space-x-6 text-sm text-gray-400">
+                    <span>© 2025 投资分析报告</span>
+                    <span>•</span>
+                    <span>数据来源：iShares、彭博社、美联储</span>
+                    <span>•</span>
+                    <span>报告日期：2025年11月</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 opacity-0 invisible">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // 关闭移动端菜单
+                    document.querySelector('.mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-sm');
+                backToTop.classList.remove('opacity-0', 'invisible');
+            } else {
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm');
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // 返回顶部
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 资产配置图表
+        const assetCtx = document.getElementById('assetAllocationChart').getContext('2d');
+        new Chart(assetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['现金及等价物', '美国债券'],
+                datasets: [{
+                    data: [98.27, 1.73],
+                    backgroundColor: [
+                        '#3B82F6',
+                        '#10B981'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+
+        // 分红历史图表
+        const dividendCtx = document.getElementById('dividendHistoryChart').getContext('2d');
+        new Chart(dividendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2022年1月', '2022年6月', '2022年12月', '2023年6月', '2023年12月', '2024年6月', '2024年12月', '2025年6月', '2025年10月'],
+                datasets: [{
+                    label: '月度分红金额 (美元)',
+                    data: [0.002, 0.116, 0.283, 0.392, 0.443, 0.440, 0.449, 0.362, 0.3466],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#10B981'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toFixed(3);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 费率与收益率对比图表
+        const feeYieldCtx = document.getElementById('feeYieldChart').getContext('2d');
+        new Chart(feeYieldCtx, {
+            type: 'bar',
+            data: {
+                labels: ['SGOV', 'BIL', 'VGSH', 'SHV', 'JPST'],
+                datasets: [{
+                    label: '费用率 (%)',
+                    data: [0.09, 0.14, 0.04, 0.15, 0.18],
+                    backgroundColor: '#3B82F6',
+                    yAxisID: 'y'
+                }, {
+                    label: '1年总回报率 (%)',
+                    data: [5.13, 5.05, 5.14, 3.98, 5.11],
+                    backgroundColor: '#10B981',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: '费用率 (%)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: '1年总回报率 (%)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    }
+                }
+            }
+        });
+
+        // 资产规模对比图表
+        const assetSizeCtx = document.getElementById('assetSizeChart').getContext('2d');
+        new Chart(assetSizeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['SGOV', 'BIL', 'JPST', 'VGSH', 'SHV'],
+                datasets: [{
+                    data: [591.5, 369.9, 342.7, 247.3, 206.7],
+                    backgroundColor: [
+                        '#3B82F6',
+                        '#10B981',
+                        '#F59E0B',
+                        '#EF4444',
+                        '#8B5CF6'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': $' + context.raw + 'B';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 为所有section添加滚动动画
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // 初始显示第一个section
+        document.querySelector('section').style.opacity = '1';
+        document.querySelector('section').style.transform = 'translateY(0)';
+    </script>
+</body>
+</html>
