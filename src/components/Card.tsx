@@ -67,12 +67,12 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
       tabIndex={0}
     >
       <div className="card-header">
-        <div className="flex items-start">
+        <div className="flex items-center">
           <div className={`${colorClass} w-6 h-6 rounded-md mr-2.5 flex items-center justify-center flex-shrink-0`}>
             <FontAwesomeIcon icon={icon} className="text-sm" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
+            <h3 className="text-md font-bold text-gray-900 line-clamp-1">
               {highlightedTitle}
             </h3>
           </div>
