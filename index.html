@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wiki 索引 · 极简目录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa',
+                        neutral: '#f3f4f6',
+                        dark: '#1f2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-hover { transition: all 0.3s ease; }
+            .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50 font-sans">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fas fa-book text-primary text-2xl mr-3"></i>
+                <span class="font-bold text-xl text-gray-900">AI Wiki 索引</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#catalog" class="text-gray-700 hover:text-primary">目录</a>
+                <a href="#about" class="text-gray-700 hover:text-primary">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="gradient-bg text-white py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">极简研究目录</h1>
+            <p class="text-lg opacity-90 mb-6">单文件、零构建，快速浏览并跳转到各详情页。</p>
+            <div class="max-w-xl">
+                <div class="relative">
+                    <input id="search" type="text" class="w-full rounded-lg bg-white/90 text-gray-900 px-4 py-3 pl-11 pr-10 focus:outline-none" placeholder="搜索标题、简介或标签">
+                    <i class="fas fa-magnifying-glass absolute left-3 top-3.5 text-gray-500"></i>
+                    <button id="clear" class="absolute right-2 top-2.5 text-gray-500 hover:text-gray-800"><i class="fas fa-xmark"></i></button>
+                </div>
+                <div id="results-count" class="mt-3 text-sm text-white/90" aria-live="polite"></div>
+            </div>
+        </div>
+    </header>
+
+    <main id="catalog" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">全部条目</h2>
+            <p class="text-gray-600">点击卡片进入详情页。支持搜索过滤与键盘导航。</p>
+        </section>
+
+        <div id="cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="empty" class="hidden bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg text-gray-800">无匹配结果，请更换关键词。</div>
+
+        <noscript>
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">无脚本回退</h3>
+                <ul class="list-disc pl-5 text-gray-700">
+                    <li><a class="text-primary hover:underline" href="investment/voo_vs_spy/voo_vs_spy.html">VOO 与 SPY 深度对比：长期买入持有策略的最佳选择</a></li>
+                </ul>
+            </div>
+        </noscript>
+    </main>
+
+    <footer id="about" class="bg-gray-900 text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center items-center mb-3">
+                <i class="fas fa-chart-line text-primary text-2xl mr-2"></i>
+                <span class="font-bold text-lg">AI Wiki</span>
+            </div>
+            <p class="text-gray-400">本目录仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300 hover:bg-blue-700">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const cardsData = [
+            {
+                title: 'VOO 与 SPY 深度对比',
+                desc: '长期买入持有策略的最佳选择',
+                href: 'investment/voo_vs_spy/voo_vs_spy.html',
+                category: 'Investment',
+                tags: ['ETF','S&P500','VOO','SPY'],
+                updatedAt: '2025-11'
+            }
+        ];
+
+        const cardsEl = document.getElementById('cards');
+        const searchEl = document.getElementById('search');
+        const emptyEl = document.getElementById('empty');
+        const clearEl = document.getElementById('clear');
+        const resultsCountEl = document.getElementById('results-count');
+
+        function renderCards(list) {
+            cardsEl.innerHTML = '';
+            list.forEach((item, idx) => {
+                const a = document.createElement('a');
+                a.href = item.href;
+                a.className = 'block bg-white rounded-xl shadow-lg p-6 card-hover focus:outline-none focus:ring-2 focus:ring-primary';
+                a.setAttribute('aria-label', item.title);
+                a.setAttribute('tabindex', '0');
+
+                const tags = item.tags.map(t => `<button type="button" class="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded" data-tag="${t}">${t}</button>`).join(' ');
+                a.innerHTML = `
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4"><i class="fas fa-file-lines text-blue-600 text-xl"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">${item.title}</h3>
+                            <p class="text-gray-600 mt-1">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">${tags}</div>
+                        <div class="text-gray-500 text-sm">更新：${item.updatedAt}</div>
+                    </div>
+                `;
+                cardsEl.appendChild(a);
+            });
+        }
+
+        function normalize(s) { return String(s || '').toLowerCase(); }
+
+        function filterCards() {
+            const q = normalize(searchEl.value);
+            const list = cardsData.filter(item => {
+                const hay = [item.title, item.desc, item.category, ...(item.tags||[])].map(normalize).join(' ');
+                return hay.includes(q);
+            });
+            renderCards(list);
+            emptyEl.classList.toggle('hidden', list.length > 0);
+            resultsCountEl.textContent = `共 ${list.length} 条结果`;
+        }
+
+        function debounce(fn, ms){ let t; return function(...args){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,args), ms); }; }
+
+        renderCards(cardsData);
+        resultsCountEl.textContent = `共 ${cardsData.length} 条结果`;
+        searchEl.addEventListener('input', debounce(filterCards, 150));
+        clearEl.addEventListener('click', () => { searchEl.value = ''; filterCards(); searchEl.focus(); });
+        window.addEventListener('load', () => { searchEl.focus(); });
+
+        document.addEventListener('keydown', e => {
+            const focusables = Array.from(cardsEl.querySelectorAll('a'));
+            if (!focusables.length) return;
+            const i = focusables.indexOf(document.activeElement);
+            if (['ArrowRight','ArrowDown'].includes(e.key)) {
+                const next = focusables[Math.min((i >= 0 ? i + 1 : 0), focusables.length - 1)];
+                if (next) next.focus();
+            } else if (['ArrowLeft','ArrowUp'].includes(e.key)) {
+                const prev = focusables[Math.max((i >= 0 ? i - 1 : 0), 0)];
+                if (prev) prev.focus();
+            } else if (e.key === 'Enter' && i >= 0) {
+                focusables[i].click();
+            } else if (e.key === 'Escape') {
+                searchEl.value = '';
+                filterCards();
+            }
+        });
+
+        cardsEl.addEventListener('click', e => {
+            const t = e.target;
+            if (t && t.classList.contains('tag')) {
+                const v = t.getAttribute('data-tag') || '';
+                searchEl.value = v;
+                filterCards();
+                searchEl.focus();
+            }
+        });
+
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.style.opacity = window.scrollY > 120 ? '1' : '0';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
