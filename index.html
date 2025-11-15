@@ -31,6 +31,14 @@
             .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
             .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
             .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            .gradient-bg-vertical { 
+                background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%);
+                background-attachment: fixed;
+            }
+            .gradient-bg-elegant { 
+                background: linear-gradient(180deg, #fefefe 0%, #f7f9fc 30%, #eef2f7 60%, #e1e8ef 90%, #d1d9e0 100%);
+                background-attachment: fixed;
+            }
             .card-fixed {
                 height: 240px;
                 display: flex;
@@ -75,7 +83,7 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col bg-gray-50 font-sans">
+<body class="min-h-screen flex flex-col gradient-bg-elegant font-sans">
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center">
@@ -142,6 +150,7 @@
                     </button>
                 </div>
             </div>
+            <div id="results-count" class="text-sm text-gray-600 mt-2"></div>
         </section>
 
         <div id="cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
