@@ -6,7 +6,8 @@ export class RootStore {
   // 导航和筛选相关状态
   searchQuery: string = '';
   currentMarket: 'all' | 'us-stock' | 'a-share' | 'hk-stock' | 'crypto' = 'all';
-  currentType: 'all' | 'stock' | 'etf' | 'crypto' | 'strategy' = 'all';
+  currentType: 'all' | 'stock' | 'etf' | 'crypto' | 'strategy' | 'bond' = 'all';
+  currentTag: string = 'all';
   
   // UI状态
   isLoading: boolean = false;
@@ -27,6 +28,10 @@ export class RootStore {
 
   setCurrentType(type: 'all' | 'stock' | 'etf' | 'crypto' | 'strategy') {
     this.currentType = type;
+  }
+
+  setCurrentTag(tag: string) {
+    this.currentTag = tag;
   }
 
   clearSearch() {
@@ -57,8 +62,10 @@ export class RootStore {
       const matchesMarket = this.currentMarket === 'all' || card.market === this.currentMarket;
       // 类型筛选
       const matchesType = this.currentType === 'all' || card.type === this.currentType;
+      // 标签筛选
+      const matchesTag = this.currentTag === 'all' || card.tags.includes(this.currentTag);
       
-      return matchesSearch && matchesMarket && matchesType;
+      return matchesSearch && matchesMarket && matchesType && matchesTag;
     });
   }
 
@@ -81,6 +88,7 @@ export class RootStore {
     this.searchQuery = '';
     this.currentMarket = 'all';
     this.currentType = 'all';
+    this.currentTag = 'all';
   }
 
   // 获取当前筛选状态的描述
@@ -89,6 +97,7 @@ export class RootStore {
     if (this.searchQuery) filters.push(`搜索:"${this.searchQuery}"`);
     if (this.currentMarket !== 'all') filters.push(`市场:"${this.currentMarket}"`);
     if (this.currentType !== 'all') filters.push(`类型:"${this.currentType}"`);
+    if (this.currentTag !== 'all') filters.push(`标签:"${this.currentTag}"`);
     
     return filters.length > 0 ? filters.join(', ') : '无筛选条件';
   }
