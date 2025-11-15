@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -6,23 +6,10 @@ import { rootStore } from '../stores';
 
 export const Nav = observer(() => {
 
-  // 防抖处理搜索输入
-  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    
-    // 简单的防抖实现
-    const timeoutId = setTimeout(() => {
-      rootStore.setSearchQuery(value);
-    }, 150);
-    
-    // 清除之前的timeout
-    const input = e.target;
-    const existingTimeout = (input as any).searchTimeout;
-    if (existingTimeout) {
-      clearTimeout(existingTimeout);
-    }
-    (input as any).searchTimeout = timeoutId;
-  }, []);
+    rootStore.setSearchQuery(value);
+  };
 
   const handleClearSearch = () => {
     rootStore.clearSearch();
@@ -44,15 +31,14 @@ export const Nav = observer(() => {
             className="w-40 sm:w-64 rounded-lg bg-gray-50 text-gray-900 px-3 py-2 pl-9 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:bg-white transition-all duration-200 group-hover:bg-gray-100"
             placeholder="搜索投资研究..."
           />
-          <FontAwesomeIcon 
-            icon={faMagnifyingGlass} 
-            className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 group-hover:text-indigo-600 transition-colors duration-200" 
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 group-hover:text-indigo-600 transition-colors duration-200"
           />
           <button
             onClick={handleClearSearch}
-            className={`absolute right-1.5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 hover:bg-gray-200 rounded-full w-5 h-5 flex items-center justify-center transition-all duration-200 ${
-              rootStore.searchQuery ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute right-1.5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 hover:bg-gray-200 rounded-full w-5 h-5 flex items-center justify-center transition-all duration-200 ${rootStore.searchQuery ? 'opacity-100' : 'opacity-0'
+              }`}
             style={{ pointerEvents: rootStore.searchQuery ? 'auto' : 'none' }}
           >
             <FontAwesomeIcon icon={faXmark} className="text-xs" />

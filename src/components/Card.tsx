@@ -108,9 +108,6 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
       <div className="card-footer">
         <div className="text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2 w-full flex justify-between items-center">
           <span>更新时间：{data.updatedAt}</span>
-          <span className="text-xs text-gray-400">
-            {data.category}
-          </span>
         </div>
       </div>
     </a>
