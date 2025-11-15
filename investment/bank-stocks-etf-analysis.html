@@ -1,0 +1,1744 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股银行板块投资分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // Tailwind配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af', // 深蓝色主色调，体现专业感
+                        secondary: '#3b82f6', // 中蓝色辅助色
+                        accent: '#bfdbfe', // 浅蓝色强调色
+                        dark: '#0f172a', // 深色文本
+                        light: '#f8fafc', // 浅色背景
+                        neutral: '#94a3b8', // 中性色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            }
+            .nav-active {
+                @apply border-l-4 border-primary text-primary font-medium;
+            }
+            .card-transition {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-line-chart text-primary text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-primary">银行板块投资分析</h1>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+            <nav id="desktop-menu" class="hidden md:flex items-center space-x-6">
+                <a href="#investment-summary" class="text-gray-600 hover:text-primary transition-colors">投资要点</a>
+                <a href="#dividend-analysis" class="text-gray-600 hover:text-primary transition-colors">股息分析</a>
+                <a href="#volatility-analysis" class="text-gray-600 hover:text-primary transition-colors">波动率分析</a>
+                <a href="#growth-analysis" class="text-gray-600 hover:text-primary transition-colors">成长性分析</a>
+                <a href="#fundamentals" class="text-gray-600 hover:text-primary transition-colors">基本面分析</a>
+                <a href="#investment-advice" class="text-gray-600 hover:text-primary transition-colors">投资建议</a>
+            </nav>
+        </div>
+        <!-- 移动端菜单 -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#investment-summary" class="py-2 text-gray-600 hover:text-primary transition-colors">投资要点</a>
+                <a href="#dividend-analysis" class="py-2 text-gray-600 hover:text-primary transition-colors">股息分析</a>
+                <a href="#volatility-analysis" class="py-2 text-gray-600 hover:text-primary transition-colors">波动率分析</a>
+                <a href="#growth-analysis" class="py-2 text-gray-600 hover:text-primary transition-colors">成长性分析</a>
+                <a href="#fundamentals" class="py-2 text-gray-600 hover:text-primary transition-colors">基本面分析</a>
+                <a href="#investment-advice" class="py-2 text-gray-600 hover:text-primary transition-colors">投资建议</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
+        <!-- 侧边导航栏 (桌面端) -->
+        <aside class="hidden md:block w-64 flex-shrink-0 mr-8">
+            <div class="bg-white rounded-lg shadow-card p-4 sticky top-24">
+                <h2 class="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">目录导航</h2>
+                <nav class="flex flex-col space-y-1">
+                    <a href="#investment-summary" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-star-o mr-2 text-primary"></i>投资要点
+                    </a>
+                    <a href="#dividend-analysis" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-money mr-2 text-primary"></i>股息分析
+                    </a>
+                    <a href="#volatility-analysis" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-area-chart mr-2 text-primary"></i>波动率分析
+                    </a>
+                    <a href="#growth-analysis" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-line-chart mr-2 text-primary"></i>成长性分析
+                    </a>
+                    <a href="#fundamentals" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-bar-chart mr-2 text-primary"></i>基本面分析
+                    </a>
+                    <a href="#comparison" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-balance-scale mr-2 text-primary"></i>投资对比
+                    </a>
+                    <a href="#investment-advice" class="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md transition-colors">
+                        <i class="fa fa-lightbulb-o mr-2 text-primary"></i>投资建议
+                    </a>
+                </nav>
+                
+                <!-- 推荐标的卡片 -->
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <h3 class="font-medium text-gray-800 mb-3">推荐投资标的</h3>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded-md text-sm">
+                            <p class="font-medium text-primary">招商银行 (600036)</p>
+                            <p class="text-gray-600">零售之王，ROE 14.49%</p>
+                        </div>
+                        <div class="bg-blue-50 p-2 rounded-md text-sm">
+                            <p class="font-medium text-primary">成都银行 (601838)</p>
+                            <p class="text-gray-600">ROE 17.81%，不良率 0.66%</p>
+                        </div>
+                        <div class="bg-blue-50 p-2 rounded-md text-sm">
+                            <p class="font-medium text-primary">中证银行ETF (512820)</p>
+                            <p class="text-gray-600">跟踪精度高，分红稳定</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 内容区域 -->
+        <div class="flex-grow max-w-4xl">
+            <!-- 投资要点部分 -->
+            <section id="investment-summary" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-star text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">投资要点</h2>
+                    </div>
+                    
+                    <div class="prose max-w-none">
+                        <p class="mb-4">基于股息率、波动率、成长性和基本面四大核心维度的深度分析，我们认为A股银行板块具备显著的长期投资价值，<strong class="text-primary">给予"强于大市"评级</strong>。在当前低利率环境下，银行股作为"确定性"与"成长性"的结合体，其4.5%以上的股息率远超10年期国债收益率（约1.7%），同时估值处于历史低位，PB仅0.53倍，PE约5.5倍。</p>
+                        
+                        <!-- 推荐标的 -->
+                        <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                            <h3 class="font-bold text-lg text-primary mb-3">投资标的推荐：</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-medium mb-2">个股首选：</p>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                        <li>招商银行（600036）</li>
+                                        <li>成都银行（601838）</li>
+                                        <li>杭州银行（600926）</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-medium mb-2">ETF推荐：</p>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                        <li>中证银行ETF（512820）</li>
+                                        <li>华宝中证银行ETF（512800）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 核心投资逻辑 -->
+                        <h3 class="font-bold text-lg text-gray-800 mb-3">核心投资逻辑：</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3 text-sm">1</div>
+                                <div>
+                                    <p class="font-medium text-gray-800">高股息+稳定性</p>
+                                    <p class="text-gray-600">国有大行股息率普遍超过4%，连续10年以上稳定分红，分红率保持在30%以上</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3 text-sm">2</div>
+                                <div>
+                                    <p class="font-medium text-gray-800">低波动+防御性</p>
+                                    <p class="text-gray-600">银行板块Beta系数仅0.61，年化波动率19%，显著低于市场平均水平</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3 text-sm">3</div>
+                                <div>
+                                    <p class="font-medium text-gray-800">成长性分化明显</p>
+                                    <p class="text-gray-600">优质城商行ROE超15%，营收和净利润保持双位数增长</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3 text-sm">4</div>
+                                <div>
+                                    <p class="font-medium text-gray-800">基本面稳健</p>
+                                    <p class="text-gray-600">42家上市银行不良贷款率均在2%以下，16家银行不良率低于1%，资产质量持续改善</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 估值对比图表 -->
+                    <div class="mt-8">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">银行板块估值与市场对比</h3>
+                        <div class="h-64">
+                            <canvas id="valuationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 股息分析部分 -->
+            <section id="dividend-analysis" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-money text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">一、股息分析：高股息率与稳定性的双重优势</h2>
+                    </div>
+                    
+                    <!-- 1.1 银行股股息率水平分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1.1</span>
+                            银行股股息率水平分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">A股银行股在股息率方面展现出显著的投资吸引力。根据最新数据，2024年银行股股息率呈现明显的分化特征。在股份制银行中，<strong class="text-primary">平安银行以5.97%的股息率领跑</strong>，其次是厦门银行5.95%、上海银行5.71%、成都银行5.65%、浙商银行5.59%、民生银行5.52%。</p>
+                            
+                            <p class="mb-4">国有大行的股息率虽然相对较低，但仍保持在较高水平。根据2024年的分红数据，<strong class="text-primary">建设银行股息率为4.73%，工商银行4.48%，交通银行5.15%，招商银行4.63%，兴业银行4.92%</strong>。从股息率的绝对值来看，这些银行的股息率均显著高于目前市场上的固收产品收益，充分体现了银行股作为"类债券"资产的投资价值。</p>
+                        </div>
+                        
+                        <!-- 股息率对比图表 -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-800 mb-3">主要银行2024年股息率对比（%）</h4>
+                            <div class="h-64">
+                                <canvas id="dividendRateChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 1.2 股息支付的连续性与稳定性 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1.2</span>
+                            股息支付的连续性与稳定性
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行股在股息支付的连续性方面表现卓越，堪称A股市场的"稳定典范"。<strong class="text-primary">国有大行普遍保持了连续10年以上的稳定分红记录</strong>，其中工商银行自2006年上市以来每年持续分红，累计分红金额高达1.42万亿元，分红率稳定在33%左右，近十年年均股息率约6%。</p>
+                            
+                            <div class="bg-blue-50 rounded-lg p-4 my-4">
+                                <p class="font-medium text-primary mb-2">关键数据：</p>
+                                <p class="text-gray-700"><strong>2010-2023年</strong>上市银行合计分红总额超过<strong>5.85万亿元</strong>，其中国有大行贡献<strong>4.3万亿元</strong>，占比高达<strong>74%</strong>。上市银行平均分红率为26%，其中国有大行分红率长期稳定在30%以上。</p>
+                            </div>
+                            
+                            <p>中国银行同样展现了优异的分红连续性，自2006年度起每年均为股东派发现金分红，且现金分红比例始终保持在30%以上。农业银行的分红表现同样稳定，近十年年均股息率为5.68%，在银行股中分红表现较为稳定。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 1.3 银行ETF的股息分配机制 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1.3</span>
+                            银行ETF的股息分配机制
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行ETF的股息分配机制与个股存在本质差异，投资者需要深入理解这一差异以做出合理的投资决策。银行ETF的分红主要来源于其持仓银行股的分红收益，但ETF本身的分红频率和方式具有独特性。</p>
+                            
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">ETF代码</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">基金名称</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">2024年分红次数</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">分红比例（%）</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">分红频率</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">512820</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">中证银行ETF</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">3次</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">4.97</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">月度化</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">510230</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">金融ETF</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1次（2025.6）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">4.83</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">不定期</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">512800</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">华宝中证银行ETF</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">2次</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">4.75</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">季度化</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <p class="mb-2"><strong class="text-primary">需要特别注意的是，银行ETF的分红具有明显的月度化趋势</strong>。以银行ETF龙头（512820）为例，该基金在2024年连续3个月进行分红，显示出较高的分红频率。这种高频分红模式为投资者提供了更灵活的现金流管理选择。</p>
+                            
+                            <p>然而，投资者也需要关注ETF分红的一些特点。首先，ETF分红后基金净值会相应下调，投资者的总资产不会因为分红而直接增加。其次，ETF的分红频率和金额取决于其持仓股票的分红情况以及基金管理人的决策。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 波动率分析部分 -->
+            <section id="volatility-analysis" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-area-chart text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">二、波动率分析：低风险特征与防御价值</h2>
+                    </div>
+                    
+                    <!-- 2.1 银行股波动率特征分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">2.1</span>
+                            银行股波动率特征分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行股在A股市场中以其低波动率特征著称，这一特性使其成为追求稳健收益投资者的优选标的。根据最新数据，<strong class="text-primary">2024年中证银行指数的年化波动率为19%，显著低于沪深300指数的23%</strong>。这一数据充分说明了银行板块的低波动特性。</p>
+                            
+                            <p class="mb-4">从更长的时间维度来看，银行板块的低波动特征更加明显。2018-2023年期间，银行板块的波动率仅为2.45%，在全行业中处于极低水平。这种低波动性并非偶然，而是由银行业的经营特性决定的。</p>
+                        </div>
+                        
+                        <!-- 波动率对比图表 -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-800 mb-3">不同类型银行波动率对比（%）</h4>
+                            <div class="h-64">
+                                <canvas id="volatilityChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                            <p class="font-medium text-primary mb-2">波动率分化特点：</p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                <li>国有大行波动率最低（1.0%-1.3%），风险最稳定</li>
+                                <li>股份制银行波动率中等（约2.5%），风险适中</li>
+                                <li>城商行波动率差异最大，反映区域风险差异</li>
+                                <li>整体银行股波动率远低于市场平均水平</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 2.2 银行ETF的风险指标分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">2.2</span>
+                            银行ETF的风险指标分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行ETF在风险控制方面表现优异，这主要体现在其跟踪误差的控制和风险调整后收益的表现上。以华宝中证银行ETF（512800）为例，该基金的风险指标显示出良好的风险收益特征。</p>
+                            
+                            <!-- 风险指标表格 -->
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">风险指标</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">近1年</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">近2年</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">近3年</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">同类平均</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">标准差（%）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">15.45</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">16.62</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">16.57</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">18.20</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">夏普比率</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">0.86</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.13</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">0.94</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">0.72</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">年化跟踪误差（%）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.03</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.15</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.20</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">2.20</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <p><strong class="text-primary">在跟踪精度方面，银行ETF展现出了专业的管理水平</strong>。华宝中证银行ETF的年化跟踪误差仅为1.03%，显著低于同类平均的2.20%。中证银行ETF（512820）的跟踪精度更为出色，近5年跟踪误差仅为0.106%，在可比基金中跟踪精度最高。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 2.3 最大回撤与风险控制 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">2.3</span>
+                            最大回撤与风险控制
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">最大回撤是评估投资风险的重要指标，银行股和银行ETF在这一指标上展现出了优异的风险控制能力。根据统计数据，<strong class="text-primary">中证银行指数近十年的年度最大回撤均值为19.34%</strong>，主要集中在2015年、2018年和2022年等市场大跌阶段。</p>
+                            
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">2025年7月以来主要银行股最大回撤（%）</h4>
+                                <div class="h-64">
+                                    <canvas id="maxDrawdownChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                                <p class="font-medium text-primary mb-2">风险控制要点：</p>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                    <li>剔除系统性风险年份，银行股最大回撤均值约14.4%-15%</li>
+                                    <li>2025年7月以来，中证银行指数回撤14.78%，接近历史平均水平</li>
+                                    <li>银行ETF最大回撤显著低于个股，中证银行ETF历史最大回撤仅-9.37%</li>
+                                    <li>2025年以来，中证银行ETF最大回撤仅为2.76%，风险控制优异</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 成长性分析部分 -->
+            <section id="growth-analysis" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-line-chart text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">三、成长性分析：分化中的结构性机遇</h2>
+                    </div>
+                    
+                    <!-- 3.1 盈利能力与ROE水平分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">3.1</span>
+                            盈利能力与ROE水平分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的盈利能力呈现出明显的分化特征，优质银行与普通银行之间的差距不断拉大。根据2024年的财务数据，在42家A股上市银行中，<strong class="text-primary">仅有2家银行的ROE超过15%，分别是成都银行（17.81%）和杭州银行（16%）</strong>。这两家城商行的ROE水平在全行业中遥遥领先，充分体现了其卓越的盈利能力。</p>
+                        </div>
+                        
+                        <!-- ROE对比图表 -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-800 mb-3">2024年主要银行ROE对比（%）</h4>
+                            <div class="h-64">
+                                <canvas id="roeChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                            <p class="font-medium text-primary mb-2">ROE水平分化特点：</p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                <li>第一梯队（ROE>15%）：成都银行（17.81%）、杭州银行（16%）</li>
+                                <li>第二梯队（ROE 12%-15%）：招商银行（14.49%）、常熟银行（14.15%）等</li>
+                                <li>第三梯队（ROE 8%-12%）：多数股份制银行和国有大行</li>
+                                <li>落后梯队（ROE<5%）：郑州银行（3.51%）等少数银行</li>
+                                <li>近三年ROE均值超13%的银行共7家，以优质城商行为主</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 3.2 营收与净利润增长分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">3.2</span>
+                            营收与净利润增长分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的营收和净利润增长同样呈现出明显的分化特征。2024年，42家上市银行合计实现营业收入56511.98亿元，较2023年仅增长0.08%，几乎持平。这一数据反映了银行业整体面临的增长压力。</p>
+                            
+                            <p class="mb-4">然而，在整体增长乏力的背景下，部分银行却实现了逆势增长。在营收方面，<strong class="text-primary">有4家银行实现了双位数增长，分别是瑞丰银行（15.29%）、西安银行（13.68%）、南京银行（11.32%）和常熟银行</strong>。</p>
+                        </div>
+                        
+                        <!-- 营收与净利润增长图表 -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-800 mb-3">2024年高增长银行营收与净利润增速（%）</h4>
+                            <div class="h-64">
+                                <canvas id="growthChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p class="mb-2"><strong class="text-primary">净利润增长方面的分化更为明显</strong>。2024年，42家银行合计实现归母净利润21440.7亿元，同比增长2.35%。在38家实现正增长的银行中，有11家银行实现了双位数增长，包括浦发银行（23.31%）、青岛银行（20.16%）、杭州银行（18.07%）、齐鲁银行（17.77%）、常熟银行（16.20%）等。</p>
+                            
+                            <p>特别值得关注的是，这些高增长银行主要集中在长三角、环渤海及成渝双城经济圈等经济发达地区，反映了区域经济发展水平对银行业绩的重要影响。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 3.3 业务结构转型与数字化发展 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">3.3</span>
+                            业务结构转型与数字化发展
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业正在经历深刻的业务结构转型，数字化转型和财富管理业务成为新的增长引擎。在数字化转型方面，银行业投入巨大。<strong class="text-primary">2024年，国有六大行的金融科技投入达到1254.59亿元，较2023年增长2.15%</strong>。</p>
+                            
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">银行名称</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">2024年科技投入（亿元）</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">同比增幅（%）</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">科技投入占营收比（%）</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">工商银行</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">285.18</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.85</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">3.25</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">建设银行</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">268.25</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">2.03</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">3.18</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">邮储银行</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">102.63</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">9.03</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">3.53</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">中国银行</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">236.89</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">1.56</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">3.02</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <p class="mb-2">财富管理业务成为银行业务转型的另一个重要方向。截至2024年6月末，银行理财规模达到28.52万亿元，较2023年末提升6.42%，占我国资产管理行业总体规模的20%，发挥了"压舱石"的作用。</p>
+                            
+                            <p>部分银行在财富管理业务方面表现突出。以兴业银行为例，其线上财富管理平台"钱大掌柜"月均AUM近两年增长220.09%至64.21万户，复合增长率达78.91%；手机银行月活跃用户数近两年增长44.11%至2252.62万户。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 3.4 ETF成分股的成长性特征 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">3.4</span>
+                            ETF成分股的成长性特征
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行ETF的成分股结构体现了银行业的整体特征和成长性分化。中证银行指数涵盖了42只成分股，包括6家国有大行（权重27.5%）、9家股份制银行（42.7%）、17家城商行（23.8%）和10家农商行（6%）。这种结构反映了中国银行业的多元化格局。</p>
+                            
+                            <!-- ETF成分股权重图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">中证银行ETF成分股权重分布</h4>
+                                <div class="h-64">
+                                    <canvas id="etfWeightChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <p class="mt-4"><strong class="text-primary">从权重分布来看，指数呈现出明显的龙头集中特征</strong>。前十大权重股合计权重为65.64%，包括招商银行（14.79%）、兴业银行（11.38%）、工商银行（7.80%）、交通银行（6.26%）等。这些权重股都是银行业的龙头企业，具有较强的盈利能力和成长性。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 基本面分析部分 -->
+            <section id="fundamentals" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-bar-chart text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">四、基本面分析：财务健康与估值优势</h2>
+                    </div>
+                    
+                    <!-- 4.1 资本充足率与风险抵御能力 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4.1</span>
+                            资本充足率与风险抵御能力
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的资本充足率是衡量其风险抵御能力的核心指标，当前银行业整体资本充足率水平较高，风险抵御能力较强。根据2024年末的数据，<strong class="text-primary">六大国有银行的核心一级资本充足率均超过监管最低要求（9.0%）</strong>，其中建设银行和工商银行的资本充足率超过监管要求5个百分点以上，显示出较强的资本实力。</p>
+                        </div>
+                        
+                        <!-- 资本充足率图表 -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-800 mb-3">2024年末六大行核心一级资本充足率（%）</h4>
+                            <div class="h-64">
+                                <canvas id="capitalAdequacyChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p class="mb-2">从总资本充足率来看，六大行的表现更为优异。<strong class="text-primary">2024年末，工商银行的资本充足率提升至19.39%，建设银行提升至19.69%（较上年末提升1.74个百分点），农业银行从17.14%攀升至18.19%</strong>。</p>
+                            
+                            <p>在城商行中，资本充足率的分化较为明显。贵阳银行以12.94%的核心一级资本充足率位居城商行榜首，宜宾市商业银行以12.61%紧随其后，贵州银行以12.24%位居第三。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 4.2 盈利能力指标分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4.2</span>
+                            盈利能力指标分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的盈利能力指标呈现出分化特征，部分银行在净息差和成本控制方面表现突出。在净息差方面，2024年42家上市银行中，<strong class="text-primary">仅有2家银行的净息差超过2%，分别是常熟银行（2.71%）和长沙银行（2.11%）</strong>。</p>
+                            
+                            <!-- 盈利能力指标图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">主要银行盈利能力指标对比</h4>
+                                <div class="h-64">
+                                    <canvas id="profitabilityChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                                <p class="font-medium text-primary mb-2">盈利能力分化要点：</p>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                    <li>净息差：常熟银行（2.71%）、长沙银行（2.11%）领先</li>
+                                    <li>成本收入比：平安银行最低（27.66%），5家银行低于30%</li>
+                                    <li>非利息收入占比：南京银行最高（47.04%），18家银行超30%</li>
+                                    <li>非利息收入结构优化反映业务多元化进展</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4.3 资产质量与风控水平 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4.3</span>
+                            资产质量与风控水平
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的资产质量整体保持稳健，风险控制能力不断增强。根据2024年的数据，<strong class="text-primary">42家上市银行的不良贷款率均控制在2%以下，其中16家银行的不良贷款率低于1%，占比达38.09%</strong>。这一数据充分说明了中国银行业资产质量的整体优良。</p>
+                            
+                            <!-- 资产质量图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">2024年主要银行不良率与拨备覆盖率</h4>
+                                <div class="h-64">
+                                    <canvas id="assetQualityChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <p class="mb-2">与低不良率相对应的是充足的风险缓冲。数据显示，有18家银行的拨备覆盖率超过300%，其中<strong class="text-primary">7家银行的拨备覆盖率超过400%，包括杭州银行（541.45%）、常熟银行（500.51%）、苏州银行（483.50%）、成都银行（479.29%）</strong>等。</p>
+                                
+                                <p>从资产结构来看，银行业正在经历深刻的调整。数据显示，从2020年末到2025年中，<strong class="text-primary">上市银行对公贷款占总贷款的比重从57.02%提升至63.22%，提升了6.2个百分点</strong>。这种调整有助于优化资产结构，提升资产质量。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4.4 估值水平与投资价值 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4.4</span>
+                            估值水平与投资价值
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的估值水平处于历史极低位置，具有显著的投资价值。根据最新数据，<strong class="text-primary">截至2025年9月，银行板块整体PE约5.5倍，处于近10年历史分位数的27.01%；PB约0.53倍，处于历史分位数的24.85%</strong>。这种极低的估值水平在A股各行业中极为罕见。</p>
+                            
+                            <!-- 估值对比图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">银行板块估值与市场对比</h4>
+                                <div class="h-64">
+                                    <canvas id="marketValuationChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                                <p class="font-medium text-primary mb-2">估值水平要点：</p>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                    <li>当前银行板块PE约5.5倍，PB约0.53倍，处于历史低位</li>
+                                    <li>股息率约4.5%，处于历史分位点的99.41%，接近历史最高水平</li>
+                                    <li>国有银行PB约0.5倍，低于历史均值约28%，严重低估</li>
+                                    <li>股份制银行PB约0.7-0.9倍，低于历史均值约10-25%</li>
+                                    <li>招商银行PB约1.19，接近历史均值，处于合理区间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4.5 监管评级与合规经营 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">4.5</span>
+                            监管评级与合规经营
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行业的监管评级整体良好，合规经营水平较高。根据中国人民银行发布的《中国金融稳定报告（2024）》，央行对3936家银行机构开展了金融机构评级，评级结果按风险由低到高划分为11级（1-10级和D级）。</p>
+                            
+                            <!-- 监管评级图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">银行机构监管评级分布</h4>
+                                <div class="h-64">
+                                    <canvas id="regulatoryRatingChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <p class="mb-2">评级结果显示，<strong class="text-primary">评级处于"绿区"（1-5级）的银行有1979家，资产规模占比93.88%；"黄区"（6-7级）银行1600家，资产规模占比4.34%；"红区"（8-10级和D级）银行357家，资产规模占比仅1.78%</strong>。这一结果充分说明了中国银行业整体风险可控。</p>
+                                
+                                <p>中国银行业协会对194家银行的"陀螺"评价结果显示，全国性银行前五名为工商银行、建设银行、招商银行、中国银行、农业银行；城商行前三位为北京银行、江苏银行、宁波银行；城区农商行前三位为上海农商行、重庆农商行、深圳农商行。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 投资对比分析部分 -->
+            <section id="comparison" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-balance-scale text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">五、银行股与ETF投资价值对比分析</h2>
+                    </div>
+                    
+                    <!-- 5.1 投资风险收益特征对比 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">5.1</span>
+                            投资风险收益特征对比
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行股与银行ETF在风险收益特征方面存在显著差异，投资者需要根据自身需求做出选择。从风险分散角度来看，<strong class="text-primary">ETF具有天然优势，通过持有多只银行股有效分散了个股风险</strong>。</p>
+                            
+                            <!-- 风险收益对比表格 -->
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">对比维度</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">银行股（优质个股）</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">银行ETF</th>
+                                            <th class="py-2 px-4 border-b text-left text-sm font-medium text-gray-700">优势方</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">最大回撤（%）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">20-26</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">-9.37</td>
+                                            <td class="py-2 px-4 border-b text-sm text-primary">ETF</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">年化波动率（%）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">18-25</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">15.45</td>
+                                            <td class="py-2 px-4 border-b text-sm text-primary">ETF</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">长期年化收益（%）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">8-12（优质股）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">8.2</td>
+                                            <td class="py-2 px-4 border-b text-sm text-primary">优质个股</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">流动性</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">差异较大，部分个股较低</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">较好，交易便利</td>
+                                            <td class="py-2 px-4 border-b text-sm text-primary">ETF</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">超额收益潜力</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">较高</td>
+                                            <td class="py-2 px-4 border-b text-sm text-gray-700">较低（获取平均收益）</td>
+                                            <td class="py-2 px-4 border-b text-sm text-primary">银行股</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5.2 投资成本与效率分析 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">5.2</span>
+                            投资成本与效率分析
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">在投资成本方面，ETF具有显著优势。以华宝中证银行ETF为例，其管理费率为0.5%，托管费率为0.1%，合计年费率仅0.6%。相比之下，直接投资个股需要承担较高的交易成本，包括佣金、印花税等。</p>
+                            
+                            <!-- 成本对比图表 -->
+                            <div class="mt-6">
+                                <h4 class="font-medium text-gray-800 mb-3">100万元投资的年成本对比（元）</h4>
+                                <div class="h-64">
+                                    <canvas id="costComparisonChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <p class="mb-2">从投资效率来看，ETF能够实现一键布局整个银行板块，避免了个股选择的困扰。特别是对于不具备专业研究能力的普通投资者，ETF提供了简单高效的投资方式。</p>
+                                
+                                <p>在税收方面，ETF也具有一定优势。根据相关规定，基金向投资者分配的基金收益暂免征收所得税。这意味着投资者通过ETF获得的分红收入可以享受税收优惠，而直接投资个股则需要缴纳股息红利税。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5.3 适用场景与投资策略 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">5.3</span>
+                            适用场景与投资策略
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">银行股和银行ETF适用于不同的投资场景和策略。对于具备专业研究能力、风险承受能力较强的投资者，可以选择优质银行股进行投资，以获取超额收益。特别是对于那些在特定领域具有竞争优势、成长性突出的银行，如招商银行、成都银行、杭州银行等，具有较大的投资价值。</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2">银行股适合的投资者：</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                        <li>具备专业研究能力的投资者</li>
+                                        <li>风险承受能力较强的投资者</li>
+                                        <li>追求超额收益的投资者</li>
+                                        <li>能够密切跟踪个股基本面的投资者</li>
+                                        <li>投资期限灵活的投资者</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2">银行ETF适合的投资者：</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                                        <li>风险偏好较低的投资者</li>
+                                        <li>缺乏专业研究能力的普通投资者</li>
+                                        <li>追求稳健收益的投资者</li>
+                                        <li>长期投资（10年以上）的投资者</li>
+                                        <li>资产配置需求的投资者</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <p>从投资期限来看，10年以上的长期投资更适合选择ETF。长期投资的关键在于获得稳定的复合收益，而ETF的低管理费用、高流动性、分散风险等特征使其成为长期投资的理想工具。从资产配置角度来看，投资者可以将ETF作为核心持仓，同时选择部分优质银行股作为卫星持仓，以获取超额收益。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 投资建议部分 -->
+            <section id="investment-advice" class="mb-12">
+                <div class="bg-white rounded-lg shadow-card p-6 card-transition hover:shadow-card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-lightbulb-o text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">六、投资建议与风险提示</h2>
+                    </div>
+                    
+                    <!-- 6.1 投资标的推荐 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">6.1</span>
+                            投资标的推荐
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">基于前述多维度分析，我们对A股银行板块给予"强于大市"评级，并推荐以下投资标的：</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-medium text-lg text-gray-800 mb-3">个股推荐（按推荐顺序）：</h4>
+                                <div class="space-y-4">
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h5 class="font-bold text-primary">1. 招商银行（600036）</h5>
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">首选</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm mb-2">作为"零售之王"，招商银行在财富管理、零售业务等领域具有显著优势。</p>
+                                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                            <div class="bg-gray-50 p-1 rounded">ROE：14.49%</div>
+                                            <div class="bg-gray-50 p-1 rounded">财富管理收入占比：35%</div>
+                                            <div class="bg-gray-50 p-1 rounded">股息率：约4.6%</div>
+                                            <div class="bg-gray-50 p-1 rounded">PB：约1.19倍</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h5 class="font-bold text-primary">2. 成都银行（601838）</h5>
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">推荐</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm mb-2">2024年ROE高达17.81%，位居全行业第一；作为西部城商行龙头，受益于成渝双城经济圈发展。</p>
+                                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                            <div class="bg-gray-50 p-1 rounded">ROE：17.81%</div>
+                                            <div class="bg-gray-50 p-1 rounded">不良贷款率：0.66%</div>
+                                            <div class="bg-gray-50 p-1 rounded">拨备覆盖率：479.29%</div>
+                                            <div class="bg-gray-50 p-1 rounded">股息率：约5.65%</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h5 class="font-bold text-primary">3. 杭州银行（600926）</h5>
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">推荐</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm mb-2">2024年ROE为16%，位居行业第二；2025年上半年ROE进一步提升至19%，显示出强劲的增长势头。</p>
+                                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                            <div class="bg-gray-50 p-1 rounded">ROE：16%</div>
+                                            <div class="bg-gray-50 p-1 rounded">拨备覆盖率：541.45%</div>
+                                            <div class="bg-gray-50 p-1 rounded">2025H1 ROE：19%</div>
+                                            <div class="bg-gray-50 p-1 rounded">股息率：约5.1%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-lg text-gray-800 mb-3">ETF推荐：</h4>
+                                <div class="space-y-4">
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h5 class="font-bold text-primary">1. 中证银行ETF（512820）</h5>
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">首选</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm mb-2">跟踪中证银行指数，成分股覆盖全面；跟踪精度极高，分红稳定。</p>
+                                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                            <div class="bg-gray-50 p-1 rounded">2024年分红：3次</div>
+                                            <div class="bg-gray-50 p-1 rounded">累计分红比例：约15.3%</div>
+                                            <div class="bg-gray-50 p-1 rounded">近5年跟踪误差：0.106%</div>
+                                            <div class="bg-gray-50 p-1 rounded">风险特征：低波动</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h5 class="font-bold text-primary">2. 华宝中证银行ETF（512800）</h5>
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">推荐</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm mb-2">年化跟踪误差低于同类平均；管理费率低，夏普比率表现良好。</p>
+                                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                                            <div class="bg-gray-50 p-1 rounded">年化跟踪误差：1.03%</div>
+                                            <div class="bg-gray-50 p-1 rounded">管理费率：0.5%</div>
+                                            <div class="bg-gray-50 p-1 rounded">托管费率：0.1%</div>
+                                            <div class="bg-gray-50 p-1 rounded">规模：较大，流动性好</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6.2 投资策略建议 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">6.2</span>
+                            投资策略建议
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">针对10年以上的长期投资目标，我们建议采用以下投资策略：</p>
+                            
+                            <div class="space-y-6">
+                                <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-primary">
+                                    <h4 class="font-medium text-gray-800 mb-2">1. 分批建仓策略</h4>
+                                    <p class="text-gray-700 text-sm mb-2">鉴于当前银行板块估值处于历史低位，建议投资者采用分批建仓的方式，以降低择时风险。具体建议如下：</p>
+                                    <ul class="list-decimal list-inside space-y-1 text-gray-600 text-sm">
+                                        <li>初始建仓：将计划投资金额的40%在当前价位建仓</li>
+                                        <li>下跌补仓：当银行指数下跌5%时，追加30%的投资</li>
+                                        <li>再下跌补仓：当银行指数再下跌5%时，追加剩余30%的投资</li>
+                                    </ul>
+                                    <p class="text-gray-600 text-xs mt-2 italic">这种策略能够有效降低平均成本，同时避免踏空风险。</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-primary">
+                                    <h4 class="font-medium text-gray-800 mb-2">2. 定期再平衡策略</h4>
+                                    <p class="text-gray-700 text-sm mb-2">建议每年进行一次投资组合的再平衡，具体操作如下：</p>
+                                    <ul class="list-decimal list-inside space-y-1 text-gray-600 text-sm">
+                                        <li>当某只股票的市值占比超过组合的30%时，适当减持</li>
+                                        <li>当某只股票的基本面出现恶化时，及时调整</li>
+                                        <li>保持个股与ETF的配置比例在合理区间（建议个股占比30%-50%）</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-primary">
+                                    <h4 class="font-medium text-gray-800 mb-2">3. 股息再投资策略</h4>
+                                    <p class="text-gray-700 text-sm mb-2">鉴于银行股的高股息特征，建议将股息收入进行再投资，以充分发挥复利效应。具体可以选择：</p>
+                                    <ul class="list-decimal list-inside space-y-1 text-gray-600 text-sm">
+                                        <li>将股息直接买入原持仓股票或ETF</li>
+                                        <li>建立股息收入专用账户，积累到一定金额后进行大额投资</li>
+                                        <li>利用股息进行定期定额投资，进一步分散风险</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-primary">
+                                    <h4 class="font-medium text-gray-800 mb-2">4. 长期持有策略</h4>
+                                    <p class="text-gray-700 text-sm">基于银行业的长期发展前景和当前的低估值，建议投资者保持长期持有心态。历史经验表明，银行股的长期收益主要来自于股息回报和估值修复，而这两个因素都需要时间来体现。建议投资者设定明确的投资期限目标（如10年、15年），并坚持执行。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6.3 风险提示 -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">6.3</span>
+                            风险提示
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">投资银行股和银行ETF需要关注以下风险：</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-exclamation-triangle text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">宏观经济风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>经济下行导致贷款需求下降</li>
+                                        <li>资产质量恶化，不良贷款率上升</li>
+                                        <li>利率下行，压缩净息差空间</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-gavel text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">政策监管风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>资本监管要求提高影响分红能力</li>
+                                        <li>利率市场化压缩利差空间</li>
+                                        <li>房地产调控影响资产质量</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-users text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">行业竞争风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>互联网金融冲击传统业务</li>
+                                        <li>外资银行进入带来竞争压力</li>
+                                        <li>金融科技公司在支付、理财领域竞争</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-warning text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">个股特定风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>管理层变动影响经营策略</li>
+                                        <li>单一业务或区域集中度过高</li>
+                                        <li>财务造假或违规经营风险</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-exchange text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">ETF特有风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>跟踪误差导致与指数表现偏离</li>
+                                        <li>折溢价风险影响买卖价格</li>
+                                        <li>极端市场条件下流动性不足</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border border-red-100 bg-red-50 rounded-lg p-3 hover:shadow-md transition-shadow">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fa fa-trap text-red-500 mr-2"></i>
+                                        <h4 class="font-medium text-red-800">估值陷阱风险</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                        <li>低估值反映对前景的悲观预期</li>
+                                        <li>部分银行存在隐性风险</li>
+                                        <li>盈利模式变化使传统估值失效</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6.4 总结 -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">6.4</span>
+                            总结
+                        </h3>
+                        <div class="prose max-w-none">
+                            <p class="mb-4">综合以上分析，我们认为A股银行板块在当前时点具有显著的长期投资价值。银行股作为"确定性"与"成长性"的结合体，在低利率环境下提供了稳定的高股息回报，同时估值处于历史低位，具有较大的修复空间。</p>
+                            
+                            <div class="bg-blue-50 rounded-lg p-4 mb-4">
+                                <p class="font-medium text-primary mb-2">核心投资结论：</p>
+                                <p class="text-gray-700">对于10年以上的长期投资者，建议采用"核心-卫星"策略，以银行ETF作为核心持仓（占比50%-70%），选择2-3只优质银行股作为卫星持仓（占比30%-50%）。在具体标的选择上，优先推荐招商银行、成都银行、杭州银行等优质个股，以及中证银行ETF、华宝中证银行ETF等优质指数基金。</p>
+                            </div>
+                            
+                            <p>投资成功的关键在于保持长期投资心态，坚持定期投资和股息再投资，同时密切关注宏观经济和行业变化，及时调整投资策略。在当前的市场环境下，银行板块为投资者提供了难得的长期投资机会，值得重点关注和布局。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa fa-line-chart text-blue-400 text-2xl"></i>
+                        <h2 class="text-xl font-bold">银行板块投资分析报告</h2>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">基于股息率、波动率、成长性和基本面的深度分析</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-400 text-sm">免责声明：本报告仅供参考，不构成投资建议</p>
+                    <p class="text-gray-400 text-sm mt-1">投资有风险，入市需谨慎</p>
+                    <p class="text-gray-500 text-xs mt-2">© 2025 投资分析研究团队 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // 11. 市场估值图表
+            const marketValuationCtx = document.getElementById('marketValuationChart').getContext('2d');
+            new Chart(marketValuationCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: '银行板块',
+                        data: [
+                            {x: 5.5, y: 4.5},
+                            {x: 6.2, y: 4.8},
+                            {x: 4.8, y: 5.2},
+                            {x: 5.1, y: 4.9}
+                        ],
+                        backgroundColor: '#3b82f6',
+                        borderColor: '#1e40af'
+                    }, {
+                        label: '沪深300',
+                        data: [
+                            {x: 12.5, y: 2.1},
+                            {x: 13.2, y: 2.3},
+                            {x: 11.8, y: 1.9}
+                        ],
+                        backgroundColor: '#ef4444',
+                        borderColor: '#dc2626'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'PE倍数 vs 股息率对比'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'PE倍数'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: '股息率（%）'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 12. 监管评级图表
+            const regulatoryRatingCtx = document.getElementById('regulatoryRatingChart').getContext('2d');
+            new Chart(regulatoryRatingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['绿区 (1-5级)', '黄区 (6-7级)', '红区 (8-10级)'],
+                    datasets: [{
+                        data: [93.88, 4.34, 1.78],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderColor: ['#059669', '#d97706', '#dc2626'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '银行机构监管评级分布 (资产规模占比 %)'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // 13. 成本对比图表
+            const costComparisonCtx = document.getElementById('costComparisonChart').getContext('2d');
+            new Chart(costComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['个股投资', '银行ETF', '指数基金'],
+                    datasets: [{
+                        label: '年成本 (元)',
+                        data: [1500, 500, 200],
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
+                        borderColor: ['#1e40af', '#059669', '#d97706'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '100万元投资的年成本对比'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '年成本 (元)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单（如果打开）
+                document.getElementById('mobile-menu').classList.add('hidden');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // 减去导航栏高度
+                        behavior: 'smooth'
+                    });
+                    
+                    // 更新侧边栏导航激活状态
+                    document.querySelectorAll('#desktop-menu a, #mobile-menu a, aside nav a').forEach(link => {
+                        link.classList.remove('nav-active');
+                        if (link.getAttribute('href') === targetId) {
+                            link.classList.add('nav-active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // 图表初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 估值对比图表
+            const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+            new Chart(valuationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['银行板块', '沪深300', '创业板指', '10年期国债'],
+                    datasets: [
+                        {
+                            label: 'PE（倍）',
+                            data: [5.5, 12.8, 28.5, 0],
+                            backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                            borderColor: 'rgba(30, 64, 175, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'PB（倍）',
+                            data: [0.53, 1.35, 4.2, 0],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '股息率（%）',
+                            data: [4.5, 2.1, 0.8, 1.7],
+                            backgroundColor: 'rgba(96, 165, 250, 0.7)',
+                            borderColor: 'rgba(96, 165, 250, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '数值'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            });
+
+            // 2. 股息率对比图表
+            const dividendRateCtx = document.getElementById('dividendRateChart').getContext('2d');
+            new Chart(dividendRateCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['平安银行', '厦门银行', '上海银行', '成都银行', '建设银行', '工商银行', '交通银行', '招商银行'],
+                    datasets: [{
+                        label: '2024年股息率（%）',
+                        data: [5.97, 5.95, 5.71, 5.65, 4.73, 4.48, 5.15, 4.63],
+                        backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                        borderColor: 'rgba(30, 64, 175, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '股息率（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `股息率: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 3. 波动率对比图表
+            const volatilityCtx = document.getElementById('volatilityChart').getContext('2d');
+            new Chart(volatilityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['农业银行', '建设银行', '工商银行', '中国银行', '招商银行', '成都银行', '南京银行', '沪深300'],
+                    datasets: [{
+                        label: '波动率（%）',
+                        data: [1.0, 1.1, 1.2, 1.3, 2.5, 3.2, 2.8, 4.5],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '波动率（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 4. 最大回撤图表
+            const maxDrawdownCtx = document.getElementById('maxDrawdownChart').getContext('2d');
+            new Chart(maxDrawdownCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['民生银行', '华夏银行', '北京银行', '浙商银行', '光大银行', '兴业银行', '交通银行', '中证银行ETF'],
+                    datasets: [{
+                        label: '2025年7月以来最大回撤（%）',
+                        data: [26.82, 22.13, 22.38, 21.87, 21.72, 20.71, 17.27, 9.37],
+                        backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '最大回撤（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 5. ROE对比图表
+            const roeCtx = document.getElementById('roeChart').getContext('2d');
+            new Chart(roeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['成都银行', '杭州银行', '招商银行', '常熟银行', '宁波银行', '江苏银行', '郑州银行'],
+                    datasets: [{
+                        label: '2024年ROE（%）',
+                        data: [17.81, 16.00, 14.49, 14.15, 13.59, 13.59, 3.51],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'ROE（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 6. 营收与净利润增长图表
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['浦发银行', '青岛银行', '杭州银行', '齐鲁银行', '常熟银行', '瑞丰银行', '西安银行'],
+                    datasets: [
+                        {
+                            label: '营收增速（%）',
+                            data: [8.5, 7.2, 6.8, 9.3, 10.5, 15.29, 13.68],
+                            backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                            borderColor: 'rgba(30, 64, 175, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '净利润增速（%）',
+                            data: [23.31, 20.16, 18.07, 17.77, 16.20, 12.8, 11.5],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '增速（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 7. ETF成分股权重图表
+            const etfWeightCtx = document.getElementById('etfWeightChart').getContext('2d');
+            new Chart(etfWeightCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['招商银行', '兴业银行', '工商银行', '交通银行', '其他股份制银行', '城商行', '农商行'],
+                    datasets: [{
+                        data: [14.79, 11.38, 7.80, 6.26, 24.21, 23.80, 6.00],
+                        backgroundColor: [
+                            'rgba(30, 64, 175, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(96, 165, 250, 0.8)',
+                            'rgba(147, 197, 253, 0.8)',
+                            'rgba(191, 219, 254, 0.8)',
+                            'rgba(219, 234, 254, 0.8)',
+                            'rgba(239, 246, 255, 0.8)'
+                        ],
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 8. 资本充足率图表
+            const capitalAdequacyCtx = document.getElementById('capitalAdequacyChart').getContext('2d');
+            new Chart(capitalAdequacyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['建设银行', '工商银行', '中国银行', '农业银行', '交通银行', '邮储银行', '监管要求'],
+                    datasets: [{
+                        label: '核心一级资本充足率（%）',
+                        data: [14.48, 14.10, 12.20, 11.42, 10.24, 9.56, 9.00],
+                        backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                        borderColor: 'rgba(30, 64, 175, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '核心一级资本充足率（%）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 9. 盈利能力指标图表
+            const profitabilityCtx = document.getElementById('profitabilityChart').getContext('2d');
+            new Chart(profitabilityCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['净息差（%）', '成本收入比（%）', '非利息收入占比（%）', '拨备覆盖率（%）'],
+                    datasets: [
+                        {
+                            label: '常熟银行',
+                            data: [2.71, 35.2, 28.5, 500.51],
+                            backgroundColor: 'rgba(30, 64, 175, 0.2)',
+                            borderColor: 'rgba(30, 64, 175, 0.8)',
+                            pointBackgroundColor: 'rgba(30, 64, 175, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(30, 64, 175, 1)'
+                        },
+                        {
+                            label: '平安银行',
+                            data: [1.87, 27.66, 36.31, 289.5],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 0.8)',
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                        },
+                        {
+                            label: '南京银行',
+                            data: [1.94, 32.8, 47.04, 418.7],
+                            backgroundColor: 'rgba(96, 165, 250, 0.2)',
+                            borderColor: 'rgba(96, 165, 250, 0.8)',
+                            pointBackgroundColor: 'rgba(96, 165, 250, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(96, 165, 250, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 500
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // 10. 资产质量图表
+            const assetQualityCtx = document.getElementById('assetQualityChart').getContext('2d');
+            new Chart(assetQualityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['成都银行', '厦门银行', '宁波银行', '杭州银行', '常熟银行', '招商银行', '行业平均'],
+                    datasets: [
+                        {
+                            label: '不良贷款率（%）',
+                            data: [0.66, 0.74, 0.76, 0.76, 0.77, 0.95, 1.2],
+                            backgroundColor: '#3b82f6',
+                            borderColor: '#1e40af',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '主要银行不良贷款率对比（%）'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '不良贷款率（%）'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
