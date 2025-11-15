@@ -8,14 +8,14 @@ import {
 
 export const cardsData: CardData[] = [
   {
-    title: 'MCD股票策略分析',
-    desc: '网格策略 vs 期权轮策略',
-    href: '/investment/mcd-stock-strategy-analysis.html',
+    title: '纳斯达克100指数ETF全面对比分析',
+    desc: '投资选择与策略指南：美国本土ETF（QQQ、QQQM）与国内ETF（513100、159941等）全方位对比，投资者适配性分析与风险控制策略',
+    href: '/investment/nasdaq100-etf-comparison.html',
     category: 'Investment',
-    tags: ['MCD', '网格', '期权轮'],
-    updatedAt: '2025-11',
+    tags: ['NASDAQ100', 'QQQ'],
+    updatedAt: '2025-09',
     market: 'us-stock',
-    type: 'stock'
+    type: 'etf'
   },
   {
     title: 'VOO 与 SPY 深度对比',
@@ -25,6 +25,16 @@ export const cardsData: CardData[] = [
     tags: ['VOO', 'SPY'],
     updatedAt: '2025-11',
     market: 'us-stock',
+    type: 'etf'
+  },
+  {
+    title: '华泰柏瑞中证红利低波 ETF 联接',
+    desc: '现金流策略的理想选择，高股息 + 低波动双重特性',
+    href: '/investment/007466.html',
+    category: 'Investment',
+    tags: ['低波动', '股息'],
+    updatedAt: '2025-11',
+    market: 'a-share',
     type: 'etf'
   },
   {
@@ -58,14 +68,14 @@ export const cardsData: CardData[] = [
     type: 'etf'
   },
   {
-    title: '华泰柏瑞中证红利低波 ETF 联接',
-    desc: '现金流策略的理想选择，高股息 + 低波动双重特性',
-    href: '/investment/007466.html',
+    title: 'MCD股票策略分析',
+    desc: '网格策略 vs 期权轮策略',
+    href: '/investment/mcd-stock-strategy-analysis.html',
     category: 'Investment',
-    tags: ['低波动', '股息'],
+    tags: ['MCD', '网格', '期权轮'],
     updatedAt: '2025-11',
-    market: 'a-share',
-    type: 'etf'
+    market: 'us-stock',
+    type: 'stock'
   },
   {
     title: 'JEPQ vs QYLD 高收益ETF对比',
@@ -77,6 +87,7 @@ export const cardsData: CardData[] = [
     market: 'us-stock',
     type: 'etf'
   },
+
   {
     title: 'UVXY 反向拆分历史分析',
     desc: '波动率ETF结构性缺陷深度解析，12次反向拆分历史回顾与投资策略',
