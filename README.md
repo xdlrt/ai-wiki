@@ -1,75 +1,132 @@
 # AI Wiki - Intelligent Investment Research Library
 
-A minimalist, fast, and elegant static knowledge base focused on ETF investment strategies, market analysis, and long-term value research. Built with a "zero-build, single-file" philosophy for ultimate loading speed and smooth user experience.
+A fast, elegant, and modern investment research library and knowledge base focused on ETF investment strategies, market analysis, and long-term value research. Built with React, TypeScript, and Rsbuild for optimal performance and developer experience.
 
 ## ✨ Features
 
-- **⚡️ Lightning Fast**: No frameworks, zero build process, pure static pages for ultimate performance.
-- **🔍 Real-time Search**: Instant client-side filtering by title, description, and tags for millisecond-level content discovery.
-- **📱 Responsive Design**: Perfectly adapted for both desktop and mobile devices for easy access anywhere.
-- **🎨 Elegant UI**: Modern, clean design based on Tailwind CSS with smooth micro-interactions.
-- **💡 Minimalist Architecture**: Core functionality driven by a single `index.html` file, no complex environment setup required, easy to maintain and extend.
-- **♿️ Accessible**: Supports keyboard navigation and `\u003cnoscript\u003e` fallback to ensure core content accessibility.
+- **⚡️ Lightning Fast**: Powered by Rsbuild (Rspack) for fast development and production builds.
+- **🔍 Real-time Search & Filtering**: Instant client-side filtering by title, description, tags, market, and investment type.
+- **📱 Responsive Design**: Perfectly adapted for both desktop and mobile devices with a mobile-first approach.
+- **🎨 Elegant UI**: Modern, clean design built with Tailwind CSS 4.x and Font Awesome icons.
+- **🔄 Reactive State Management**: Uses MobX for efficient, reactive state management.
+- **💪 Type Safety**: Full TypeScript support throughout the codebase for better maintainability.
+- **♿️ Accessible**: Semantic HTML and proper ARIA labels for accessibility.
 
 ## 🛠️ Tech Stack
 
-- **HTML5**
-- **Tailwind CSS** (loaded via CDN)
-- **Font Awesome** (loaded via CDN)
-- **Vanilla JavaScript** (no frontend frameworks)
-- **Vercel** (for static deployment)
+### Core Technologies
+- **React 19.2.0** - UI framework
+- **TypeScript 5.9.3** - Type safety
+- **MobX 6.15.0** - State management
+- **Rsbuild 1.6.4** - Build tool (Rspack-based)
+- **Tailwind CSS 4.1.17** - Utility-first CSS framework
+- **Font Awesome 7.1.0** - Icon library
+
+### Development Tools
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **PostCSS** - CSS processing
 
 ## 🚀 Local Development
 
-This project requires no build steps or dependency installation.
+### Prerequisites
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/your-username/ai-wiki.git
-    cd ai-wiki
-    ```
+- **Node.js** 18+ and **pnpm** (or npm)
 
-2.  **Open directly**
-    Simply open the `index.html` file in your browser.
+### Setup
 
-3.  **Use local server (recommended)**
-    For the best experience (especially regarding browser security policies), we recommend starting a local HTTP server.
-    ```bash
-    python3 -m http.server 8000
-    ```
-    Then visit `http://localhost:8000`.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/xdlrt/ai-wiki.git
+   cd ai-wiki
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
+   The development server will automatically open in your browser at `http://localhost:3000` (or the next available port).
+
+### Available Scripts
+
+- `pnpm dev` - Start the development server with hot reload
+- `pnpm build` - Build the app for production
+- `pnpm preview` - Preview the production build locally
+- `pnpm lint` - Run ESLint to check code quality
+- `pnpm format` - Format code using Prettier
+
+## 📁 Project Structure
+
+```
+ai-wiki/
+├── src/
+│   ├── components/          # React components
+│   │   ├── Card.tsx         # Article card component
+│   │   ├── FilterBar.tsx    # Filter controls
+│   │   ├── FilterButton.tsx # Individual filter button
+│   │   ├── FilterGroup.tsx  # Filter group wrapper
+│   │   ├── Nav.tsx          # Navigation component
+│   │   └── ResultsCount.tsx # Results counter
+│   ├── data/
+│   │   └── cards.ts         # Article data and helper functions
+│   ├── stores/
+│   │   ├── RootStore.ts     # MobX store for global state
+│   │   └── index.ts         # Store exports
+│   ├── types/
+│   │   └── card.ts          # TypeScript type definitions
+│   ├── App.tsx              # Main application component
+│   ├── App.css              # Global styles
+│   └── index.tsx            # Application entry point
+├── public/
+│   └── investment/          # Static HTML articles
+├── rsbuild.config.ts        # Rsbuild configuration
+├── tailwind.config.js       # Tailwind CSS configuration
+├── tsconfig.json            # TypeScript configuration
+└── package.json             # Dependencies and scripts
+```
 
 ## 🤝 How to Contribute
 
-Contributions are welcome via Pull Request! Due to the project's minimalist nature, the contribution process is equally simple:
+Contributions are welcome via Pull Request!
 
-1.  **Fork this repository**
+1. **Fork this repository**
 
-2.  **Create content file**
-    Create a new `.html` file in the `investment/` directory for your analysis content. You can refer to existing files as templates.
+2. **Create content file**
+   Create a new `.html` file in the `public/investment/` directory for your analysis content. You can refer to existing files as templates.
 
-3.  **Update index**
-    Open the root `index.html` file and add an object pointing to your new page in the `cardsData` array within the `\u003cscript\u003e` tag. Make sure to include `title`, `desc`, `href`, `category`, `tags`, and `updatedAt` fields.
+3. **Update cards data**
+   Open `src/data/cards.ts` and add a new entry to the `cardsData` array. Make sure to include all required fields:
 
-    ```javascript
-    const cardsData = [
-        // ... existing entries
-        {
-            title: 'Your Article Title',
-            desc: 'Your article description',
-            href: 'investment/your-new-file.html',
-            category: 'Investment',
-            tags: ['new-tag1', 'new-tag2'],
-            updatedAt: '2025-11'
-        }
-    ];
-    ```
+   ```typescript
+   {
+     title: 'Your Article Title',
+     desc: 'Your article description',
+     href: '/investment/your-new-file.html',
+     category: 'Investment',
+     tags: ['new-tag1', 'new-tag2'],
+     updatedAt: '2025-01',
+     market: 'us-stock',  // or 'a-share', 'hk-stock', 'crypto'
+     type: 'etf'          // or 'stock', 'crypto', 'strategy'
+   }
+   ```
 
-4.  **(Optional) Update No-Script fallback**
-    To ensure content remains accessible in JavaScript-disabled environments, add a simple `\u003ca\u003e` link for your new page in the `index.html` `\u003cnoscript\u003e` section.
+4. **Run linting and formatting**
+   ```bash
+   pnpm lint
+   pnpm format
+   ```
 
-5.  **Submit Pull Request**
-    Submit your changes and wait for review and merge.
+5. **Submit Pull Request**
+   Submit your changes and wait for review and merge.
 
 ## 📄 License
 
