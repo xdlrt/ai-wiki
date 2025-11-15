@@ -62,7 +62,7 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
     <a
       href={data.href}
       target="_blank"
-      className="card-hover card-fixed bg-white rounded-lg border border-gray-200 shadow-sm p-4 block no-underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-indigo-600"
+      className="card-hover card-fixed bg-white rounded-lg border border-gray-200 shadow-sm p-4 block no-underline hover:no-underline"
       aria-label={data.title}
       tabIndex={0}
     >
