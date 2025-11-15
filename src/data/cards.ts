@@ -78,6 +78,16 @@ export const cardsData: CardData[] = [
     type: 'etf'
   },
   {
+    title: '纳斯达克100指数ETF全面对比分析',
+    desc: '投资选择与策略指南：美国本土ETF（QQQ、QQQM）与国内ETF（513100、159941等）全方位对比，投资者适配性分析与风险控制策略',
+    href: '/investment/nasdaq100-etf-comparison.html',
+    category: 'Investment',
+    tags: ['NASDAQ100', 'QQQ'],
+    updatedAt: '2025-09',
+    market: 'us-stock',
+    type: 'etf'
+  },
+  {
     title: 'UVXY 反向拆分历史分析',
     desc: '波动率ETF结构性缺陷深度解析，12次反向拆分历史回顾与投资策略',
     href: '/investment/uvxy-reverse-split-history-analysis.html',
