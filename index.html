@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,6 +74,7 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col bg-gray-50 font-sans">
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -93,36 +95,78 @@
             <p class="text-lg opacity-90 mb-6">深度分析ETF投资策略，实时搜索发现投资机会，一键直达专业研报</p>
             <div class="max-w-xl">
                 <div class="relative">
-                    <input id="search" type="text" class="w-full rounded-lg bg-white/90 text-gray-900 px-4 py-3 pl-11 pr-10 focus:outline-none" placeholder="搜索标题、简介或标签">
+                    <input id="search" type="text"
+                        class="w-full rounded-lg bg-white/90 text-gray-900 px-4 py-3 pl-11 pr-10 focus:outline-none"
+                        placeholder="搜索标题、简介或标签">
                     <i class="fas fa-magnifying-glass absolute left-3 top-3.5 text-gray-500"></i>
-                    <button id="clear" class="absolute right-2 top-2.5 text-gray-500 hover:text-gray-800"><i class="fas fa-xmark"></i></button>
+                    <button id="clear" class="absolute right-2 top-2.5 text-gray-500 hover:text-gray-800"><i
+                            class="fas fa-xmark"></i></button>
                 </div>
                 <div id="results-count" class="mt-3 text-sm text-white/90" aria-live="polite"></div>
             </div>
         </div>
     </header>
 
-    <main id="catalog" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <section class="mb-6">
+    <main id="catalog" class="flex-1 w-full px-4 sm:px-6 lg:px-8 py-10">
+        <section class="mb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">全部内容</h2>
-            <p class="text-gray-600">支持搜索过滤与键盘导航。</p>
+            <p class="text-gray-600 mb-4">支持搜索过滤与键盘导航。</p>
+            <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-2">市场筛选</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button
+                        class="market-filter-btn px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                        data-market="all">
+                        全部
+                    </button>
+                    <button
+                        class="market-filter-btn px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                        data-market="a-share">
+                        A股
+                    </button>
+                    <button
+                        class="market-filter-btn px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                        data-market="us-stock">
+                        美股
+                    </button>
+                    <button
+                        class="market-filter-btn px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                        data-market="hk-stock">
+                        港股
+                    </button>
+                </div>
+            </div>
         </section>
 
-        <div id="cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        <div id="empty" class="hidden bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg text-gray-800">无匹配结果，请更换关键词。</div>
+        <div id="cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
+        <div id="empty" class="hidden rounded-r-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="empty" class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg text-gray-800">
+                无匹配结果，请更换关键词。
+            </div>
+        </div>
 
         <noscript>
             <div class="mt-8">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">无脚本回退</h3>
                 <ul class="list-disc pl-5 text-gray-700">
-                    <li><a class="text-primary hover:underline" href="investment/mcd-stock-strategy-analysis.html">MCD股票策略分析：网格策略 vs 期权轮策略</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/voo_vs_spy.html">VOO 与 SPY 深度对比：长期买入持有策略的最佳选择</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/us_etf.html">美股ETF长期投资指南：科学配置，稳健增值，实现长期财务目标</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/sgov.html">SGOV 投资分析：超短期美国国债 ETF 的长期持有价值</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/007466.html">华泰柏瑞中证红利低波 ETF 联接：现金流策略的理想选择</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/jepq-vs-qyld.html">JEPQ vs QYLD 高收益ETF对比：纳斯达克100备兑看涨期权策略深度分析</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/uvxy-reverse-split-history-analysis.html">UVXY 反向拆分历史分析：波动率ETF结构性缺陷深度解析</a></li>
-                    <li><a class="text-primary hover:underline" href="investment/bank-stocks-etf-analysis.html">A股银行股票与ETF投资分析：股息率、波动率、成长性与基本面四大维度深度解析</a></li>
+                    <li><a class="text-primary hover:underline"
+                            href="investment/mcd-stock-strategy-analysis.html">MCD股票策略分析：网格策略 vs 期权轮策略</a></li>
+                    <li><a class="text-primary hover:underline" href="investment/voo_vs_spy.html">VOO 与 SPY
+                            深度对比：长期买入持有策略的最佳选择</a></li>
+                    <li><a class="text-primary hover:underline"
+                            href="investment/us_etf.html">美股ETF长期投资指南：科学配置，稳健增值，实现长期财务目标</a></li>
+                    <li><a class="text-primary hover:underline" href="investment/sgov.html">SGOV 投资分析：超短期美国国债 ETF
+                            的长期持有价值</a></li>
+                    <li><a class="text-primary hover:underline" href="investment/007466.html">华泰柏瑞中证红利低波 ETF
+                            联接：现金流策略的理想选择</a></li>
+                    <li><a class="text-primary hover:underline" href="investment/jepq-vs-qyld.html">JEPQ vs QYLD
+                            高收益ETF对比：纳斯达克100备兑看涨期权策略深度分析</a></li>
+                    <li><a class="text-primary hover:underline"
+                            href="investment/uvxy-reverse-split-history-analysis.html">UVXY 反向拆分历史分析：波动率ETF结构性缺陷深度解析</a>
+                    </li>
+                    <li><a class="text-primary hover:underline"
+                            href="investment/bank-stocks-etf-analysis.html">A股银行股票与ETF投资分析：股息率、波动率、成长性与基本面四大维度深度解析</a>
+                    </li>
                 </ul>
             </div>
         </noscript>
@@ -132,7 +176,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-gray-400 mb-4">本目录仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
             <div class="flex justify-center items-center space-x-4">
-                <a href="https://github.com/xdlrt/ai-wiki" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-primary transition-colors duration-200">
+                <a href="https://github.com/xdlrt/ai-wiki" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-300 hover:text-primary transition-colors duration-200">
                     <i class="fab fa-github text-xl"></i>
                     <span class="ml-2">GitHub</span>
                 </a>
@@ -140,7 +185,8 @@
         </div>
     </footer>
 
-    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-10 h-10 rounded-lg shadow-lg opacity-0 transition-all duration-300 hover:bg-blue-700 hover:scale-110 flex items-center justify-center">
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 bg-primary text-white w-10 h-10 rounded-lg shadow-lg opacity-0 transition-all duration-300 hover:bg-blue-700 hover:scale-110 flex items-center justify-center">
         <i class="fas fa-arrow-up text-sm"></i>
     </button>
 
@@ -151,72 +197,81 @@
                 desc: '网格策略 vs 期权轮策略，小资金场景下的最优选择，基于麦当劳股票的量化投资策略对比',
                 href: 'investment/mcd-stock-strategy-analysis.html',
                 category: 'Investment',
-                tags: ['MCD','网格','期权轮','小资金'],
-                updatedAt: '2025-11'
+                tags: ['MCD', '网格', '期权轮', '小资金'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: 'VOO 与 SPY 深度对比',
                 desc: '长期买入持有策略的最佳选择，费用率与追踪误差的全方位对比分析',
                 href: 'investment/voo_vs_spy.html',
                 category: 'Investment',
-                tags: ['ETF','S&P500','VOO','SPY'],
-                updatedAt: '2025-11'
+                tags: ['ETF', 'S&P500', 'VOO', 'SPY'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: '美股ETF长期投资指南',
                 desc: '科学配置，稳健增值，实现长期财务目标，ETF筛选标准与配置方案',
                 href: 'investment/us_etf.html',
                 category: 'Investment',
-                tags: ['ETF','美股','长期投资','配置策略'],
-                updatedAt: '2025-11'
+                tags: ['ETF', '美股', '长期投资', '配置策略'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: 'APLY长期股息投资价值分析',
                 desc: '高收益背后的风险与机遇，苹果期权收益ETF的投资价值评估',
                 href: 'investment/aply-analysis.html',
                 category: 'Investment',
-                tags: ['ETF','APLY','股息投资','苹果期权'],
-                updatedAt: '2025-11'
+                tags: ['ETF', 'APLY', '股息投资', '苹果期权'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: 'SGOV 投资分析',
                 desc: '超短期美国国债 ETF 的长期持有价值',
                 href: 'investment/sgov.html',
                 category: 'Investment',
-                tags: ['ETF','美国国债','SGOV','现金管理'],
-                updatedAt: '2025-11'
+                tags: ['ETF', '美国国债', 'SGOV', '现金管理'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: '华泰柏瑞中证红利低波 ETF 联接',
                 desc: '现金流策略的理想选择，高股息 + 低波动双重特性',
                 href: 'investment/007466.html',
                 category: 'Investment',
-                tags: ['ETF','红利低波','007466','现金流'],
-                updatedAt: '2025-11'
+                tags: ['ETF', '红利低波', '007466', '现金流'],
+                updatedAt: '2025-11',
+                market: 'a-share'
             },
             {
                 title: 'JEPQ vs QYLD 高收益ETF对比',
                 desc: '纳斯达克100备兑看涨期权策略深度分析，JEPQ与QYLD全面对比',
                 href: 'investment/jepq-vs-qyld.html',
                 category: 'Investment',
-                tags: ['ETF','JEPQ','QYLD','备兑期权','纳斯达克100'],
-                updatedAt: '2025-11'
+                tags: ['ETF', 'JEPQ', 'QYLD', '备兑期权', '纳斯达克100'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: 'UVXY 反向拆分历史分析',
                 desc: '波动率ETF结构性缺陷深度解析，12次反向拆分历史回顾与投资策略',
                 href: 'investment/uvxy-reverse-split-history-analysis.html',
                 category: 'Investment',
-                tags: ['ETF','UVXY','波动率','反向拆分','VIX期货'],
-                updatedAt: '2025-11'
+                tags: ['ETF', 'UVXY', '波动率', '反向拆分', 'VIX期货'],
+                updatedAt: '2025-11',
+                market: 'us-stock'
             },
             {
                 title: 'A股银行股票与ETF投资分析',
                 desc: '股息率、波动率、成长性与基本面四大维度深度解析，银行投资标的推荐',
                 href: 'investment/bank-stocks-etf-analysis.html',
                 category: 'Investment',
-                tags: ['银行','ETF','股息率','低波动','基本面'],
-                updatedAt: '2025-11'
+                tags: ['银行', 'ETF', '股息率', '低波动', '基本面'],
+                updatedAt: '2025-11',
+                market: 'a-share'
             }
         ];
 
@@ -225,6 +280,7 @@
         const emptyEl = document.getElementById('empty');
         const clearEl = document.getElementById('clear');
         const resultsCountEl = document.getElementById('results-count');
+        let currentMarket = 'all';
 
         function renderCards(list) {
             cardsEl.innerHTML = '';
@@ -264,30 +320,57 @@
         function filterCards() {
             const q = normalize(searchEl.value);
             const list = cardsData.filter(item => {
-                const hay = [item.title, item.desc, item.category, ...(item.tags||[])].map(normalize).join(' ');
-                return hay.includes(q);
+                const hay = [item.title, item.desc, item.category, ...(item.tags || [])].map(normalize).join(' ');
+                const matchesSearch = hay.includes(q);
+                const matchesMarket = currentMarket === 'all' || item.market === currentMarket;
+                return matchesSearch && matchesMarket;
             });
             renderCards(list);
             emptyEl.classList.toggle('hidden', list.length > 0);
             resultsCountEl.textContent = `共 ${list.length} 条结果`;
         }
 
-        function debounce(fn, ms){ let t; return function(...args){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,args), ms); }; }
+        function debounce(fn, ms) { let t; return function (...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); }; }
 
         renderCards(cardsData);
         resultsCountEl.textContent = `共 ${cardsData.length} 条结果`;
         searchEl.addEventListener('input', debounce(filterCards, 150));
         clearEl.addEventListener('click', () => { searchEl.value = ''; filterCards(); searchEl.focus(); });
+
+        // Market filter functionality
+        const marketFilterBtns = document.querySelectorAll('.market-filter-btn');
+        function updateMarketFilterButtons() {
+            marketFilterBtns.forEach(btn => {
+                if (btn.getAttribute('data-market') === currentMarket) {
+                    btn.classList.add('bg-primary', 'text-white', 'border-primary');
+                    btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-300');
+                } else {
+                    btn.classList.remove('bg-primary', 'text-white', 'border-primary');
+                    btn.classList.add('bg-white', 'text-gray-700', 'border-gray-300');
+                }
+            });
+        }
+
+        marketFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentMarket = btn.getAttribute('data-market');
+                updateMarketFilterButtons();
+                filterCards();
+            });
+        });
+
+        // Initialize button states
+        updateMarketFilterButtons();
         window.addEventListener('load', () => { searchEl.focus(); });
 
         document.addEventListener('keydown', e => {
             const focusables = Array.from(cardsEl.querySelectorAll('a'));
             if (!focusables.length) return;
             const i = focusables.indexOf(document.activeElement);
-            if (['ArrowRight','ArrowDown'].includes(e.key)) {
+            if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
                 const next = focusables[Math.min((i >= 0 ? i + 1 : 0), focusables.length - 1)];
                 if (next) next.focus();
-            } else if (['ArrowLeft','ArrowUp'].includes(e.key)) {
+            } else if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
                 const prev = focusables[Math.max((i >= 0 ? i - 1 : 0), 0)];
                 if (prev) prev.focus();
             } else if (e.key === 'Enter' && i >= 0) {
@@ -296,7 +379,7 @@
                 searchEl.value = '';
                 filterCards();
             }
-            
+
             // 标签键盘支持
             if (e.target.classList.contains('tag') && e.key === 'Enter') {
                 e.preventDefault();
@@ -328,4 +411,5 @@
         });
     </script>
 </body>
+
 </html>
