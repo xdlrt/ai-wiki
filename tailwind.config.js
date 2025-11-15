@@ -6,13 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#1e40af',
-        secondary: '#3b82f6',
-        accent: '#60a5fa',
-        neutral: '#f3f4f6',
-        dark: '#1f2937'
-      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif']
       },

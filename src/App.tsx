@@ -44,7 +44,7 @@ const App = observer(() => {
           <p className="text-gray-600 mb-4">本目录仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
           <div className="flex justify-center items-center space-x-4">
             <a href="https://github.com/xdlrt/ai-wiki" target="_blank" rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary transition-colors duration-200">
+              className="text-gray-600 hover:text-indigo-600 transition-colors duration-200">
               <FontAwesomeIcon icon={faGithub} className="text-xl" />
               <span className="ml-2">GitHub</span>
             </a>
