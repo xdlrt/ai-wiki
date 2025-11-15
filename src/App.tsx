@@ -1,38 +1,41 @@
+import React, { useMemo } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Card } from './components/Card';
+import { Nav } from './components/Nav';
+import { FilterBar } from './components/FilterBar';
+import { ResultsCount } from './components/ResultsCount';
 import { cardsData } from './data/cards';
+import { rootStore } from './stores';
+import { observer } from 'mobx-react-lite';
 
-const App = () => {
+const App = observer(() => {
+  // 使用useMemo来优化筛选性能
+  const filteredCards = rootStore.filterCards(cardsData);
+
   return (
     <div className="min-h-screen flex flex-col gradient-bg-elegant font-sans">
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center">
-            <FontAwesomeIcon icon={faBook} className="text-primary text-2xl mr-3" />
-            <span className="font-bold text-xl text-gray-900 hidden sm:block">投资研究归档</span>
-            <span className="font-bold text-lg text-gray-900 sm:hidden">投资研究</span>
-          </div>
-          <div className="relative group">
-            <input
-              type="text"
-              className="w-40 sm:w-64 rounded-lg bg-gray-50 text-gray-900 px-3 py-2 pl-9 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all duration-200 group-hover:bg-gray-100"
-              placeholder="搜索投资研究..."
-            />
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 group-hover:text-primary transition-colors duration-200" />
-          </div>
-        </div>
-      </nav>
+      <Nav />
 
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-10">
         <section className="mb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cardsData.map((card, index) => (
-              <Card key={index} data={card} />
-            ))}
-          </div>
+          <FilterBar />
+          <ResultsCount totalCount={cardsData.length} filteredCount={filteredCards.length} />
+        </section>
+
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {filteredCards.length === 0 ? (
+            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg text-gray-800">
+              无匹配结果，请更换关键词。
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredCards.map((card, index) => (
+                <Card key={index} data={card} />
+              ))}
+            </div>
+          )}
         </section>
       </main>
 
@@ -50,6 +53,6 @@ const App = () => {
       </footer>
     </div>
   );
-};
+});
 
 export default App;
