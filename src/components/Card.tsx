@@ -61,6 +61,7 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
   return (
     <a
       href={data.href}
+      target="_blank"
       className="card-hover card-fixed bg-white rounded-lg border border-gray-200 shadow-sm p-6 block no-underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-indigo-600"
       aria-label={data.title}
       tabIndex={0}
@@ -83,7 +84,7 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
         </p>
         <div className="card-tags">
           <div className="flex items-center flex-wrap gap-1">
-            {data.tags.slice(0, 3).map((tag, index) => (
+            {data.tags.map((tag, index) => (
               <span
                 key={index}
                 className="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded cursor-pointer hover:bg-gray-200 transition-colors select-none"
@@ -97,11 +98,6 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
                 {highlightSearchTerm(tag, searchTerm)}
               </span>
             ))}
-            {data.tags.length > 3 && (
-              <span className="px-2 py-1 text-xs bg-gray-100 text-gray-500 rounded">
-                +{data.tags.length - 3}
-              </span>
-            )}
           </div>
         </div>
       </div>
