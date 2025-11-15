@@ -62,24 +62,24 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
     <a
       href={data.href}
       target="_blank"
-      className="card-hover card-fixed bg-white rounded-lg border border-gray-200 shadow-sm p-6 block no-underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-indigo-600"
+      className="card-hover card-fixed bg-white rounded-lg border border-gray-200 shadow-sm p-4 block no-underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-indigo-600"
       aria-label={data.title}
       tabIndex={0}
     >
       <div className="card-header">
         <div className="flex items-start">
-          <div className={`${colorClass} w-7 h-7 rounded-md mr-3 flex items-center justify-center`}>
-            <FontAwesomeIcon icon={icon} className="text-base" />
+          <div className={`${colorClass} w-6 h-6 rounded-md mr-2.5 flex items-center justify-center flex-shrink-0`}>
+            <FontAwesomeIcon icon={icon} className="text-sm" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-xl font-bold text-gray-900 line-clamp-1">
+            <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
               {highlightedTitle}
             </h3>
           </div>
         </div>
       </div>
       <div className="card-content">
-        <p className="text-gray-600 mb-2 line-clamp-2 text-sm leading-relaxed">
+        <p className="text-gray-600 mb-1.5 line-clamp-2 text-sm leading-snug">
           {highlightedDesc}
         </p>
         <div className="card-tags">
@@ -87,7 +87,7 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
             {data.tags.map((tag, index) => (
               <span
                 key={index}
-                className="tag px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded cursor-pointer hover:bg-gray-200 transition-colors select-none"
+                className="tag px-1.5 py-0.5 text-xs bg-gray-100 text-gray-700 rounded cursor-pointer hover:bg-gray-200 transition-colors select-none"
                 data-tag={tag}
                 tabIndex={0}
                 onClick={(e) => handleTagClick(e, tag)}
@@ -102,7 +102,7 @@ export const Card: React.FC<CardProps> = ({ data, searchTerm = '', onTagClick })
         </div>
       </div>
       <div className="card-footer">
-        <div className="text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2 w-full flex justify-between items-center">
+        <div className="text-xs text-gray-500 border-t border-gray-100 pt-1.5 mt-1.5 w-full flex justify-between items-center">
           <span>更新时间：{data.updatedAt}</span>
         </div>
       </div>

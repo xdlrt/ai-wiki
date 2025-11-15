@@ -23,13 +23,13 @@
     background-attachment: fixed;
   }
   .card-fixed {
-    height: 240px;
+    height: 174px;
     display: flex;
     flex-direction: column;
   }
   .card-header { 
-    min-height: 32px;
-    margin-bottom: 8px;
+    min-height: 28px;
+    margin-bottom: 6px;
   }
   .card-content { 
     flex: 1;
@@ -38,15 +38,15 @@
     justify-content: space-between;
   }
   .card-tags {
-    min-height: 24px;
+    min-height: 20px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 12px;
+    gap: 3px;
+    margin-bottom: 8px;
   }
   .card-footer {
-    min-height: 28px;
+    min-height: 24px;
     display: flex;
     align-items: flex-end;
   }

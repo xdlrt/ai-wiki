@@ -9,7 +9,7 @@ import {
 export const cardsData: CardData[] = [
   {
     title: 'MCD股票策略分析',
-    desc: '网格策略 vs 期权轮策略，小资金场景下的最优选择，基于麦当劳股票的量化投资策略对比',
+    desc: '网格策略 vs 期权轮策略',
     href: '/investment/mcd-stock-strategy-analysis.html',
     category: 'Investment',
     tags: ['MCD', '网格', '期权轮'],

@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface FilterButtonProps {
   label: string;
   value: string;
@@ -27,7 +29,7 @@ export const FilterButton = ({
   };
 
   const baseClasses =
-    'px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-indigo-600 hover:text-white transition-colors';
+    'px-2.5 py-1.5 rounded-md border border-gray-300 text-gray-700 hover:bg-indigo-600 hover:text-white transition-colors text-sm';
   const activeClasses = isActive
     ? 'bg-indigo-600 text-white border-indigo-600'
     : 'bg-white text-gray-700 border-gray-300';

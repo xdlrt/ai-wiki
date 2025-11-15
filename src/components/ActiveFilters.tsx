@@ -50,9 +50,9 @@ export const ActiveFilters = observer(() => {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mt-4">
+    <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
       {rootStore.searchQuery.trim() && (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-1 bg-indigo-100 text-indigo-700 rounded-md text-xs font-medium">
           <span>搜索: {rootStore.searchQuery}</span>
           <button
             onClick={handleClearSearch}
@@ -65,7 +65,7 @@ export const ActiveFilters = observer(() => {
       )}
       
       {rootStore.currentMarket !== 'all' && (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs font-medium">
           <span>市场: {MARKET_LABELS[rootStore.currentMarket] || rootStore.currentMarket}</span>
           <button
             onClick={handleClearMarket}
@@ -78,7 +78,7 @@ export const ActiveFilters = observer(() => {
       )}
       
       {rootStore.currentType !== 'all' && (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs font-medium">
           <span>标的: {TYPE_LABELS[rootStore.currentType] || rootStore.currentType}</span>
           <button
             onClick={handleClearType}
@@ -91,7 +91,7 @@ export const ActiveFilters = observer(() => {
       )}
       
       {rootStore.currentTag !== 'all' && (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-700 rounded-md text-xs font-medium">
           <span>标签: {rootStore.currentTag}</span>
           <button
             onClick={handleClearTag}
@@ -105,7 +105,7 @@ export const ActiveFilters = observer(() => {
       
       <button
         onClick={handleClearAll}
-        className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+        className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium hover:bg-gray-200 transition-colors"
       >
         清除全部
       </button>
