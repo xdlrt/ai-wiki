@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美股ETF长期投资指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#3B82F6',
+                        accent: '#60A5FA',
+                        neutral: '#64748B',
+                        'neutral-light': '#F1F5F9',
+                        'neutral-dark': '#1E293B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .section-divider {
+                height: 4px;
+                width: 80px;
+                background: linear-gradient(90deg, #3B82F6, #60A5FA);
+                margin: 1rem 0;
+                border-radius: 2px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 scroll-smooth">
+    <!-- 导航栏 -->
+    <nav class="sticky-nav py-4 px-6 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-primary">
+                <i class="fa fa-line-chart mr-2"></i>
+                ETF投资指南
+            </h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-gray-600 hover:text-primary transition-colors">概述</a>
+                <a href="#selection" class="text-gray-600 hover:text-primary transition-colors">ETF筛选</a>
+                <a href="#recommendations" class="text-gray-600 hover:text-primary transition-colors">ETF推荐</a>
+                <a href="#allocation" class="text-gray-600 hover:text-primary transition-colors">配置方案</a>
+                <a href="#strategy" class="text-gray-600 hover:text-primary transition-colors">投资策略</a>
+                <a href="#risk" class="text-gray-600 hover:text-primary transition-colors">风险管理</a>
+            </div>
+            <button class="md:hidden text-gray-600">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="gradient-bg text-white py-20 px-6">
+        <div class="container mx-auto text-center animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-shadow">美股ETF长期投资指南</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">科学配置，稳健增值，实现长期财务目标</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#allocation" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all shadow-lg">
+                    <i class="fa fa-bullseye mr-2"></i>查看配置方案
+                </a>
+                <a href="#recommendations" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-all">
+                    <i class="fa fa-star mr-2"></i>ETF推荐
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- 市场概况与投资策略概述 -->
+        <section id="overview" class="mb-16 animate-slide-up">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-800">市场概况与投资策略</h2>
+                    <div class="section-divider"></div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        2025年11月，美股市场处于加息放缓预期与科技龙头业绩超预期的环境中。标普500ETF近期表现良好，
+                        截至10月底累计涨幅达12%，核心驱动因素为美联储加息放缓预期与科技龙头业绩超预期共振。
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        ETF（交易型开放式指数基金）凭借其独特优势，已成为全球投资者进行资产配置的首选工具。
+                        其核心优势包括：分散风险、低成本、高透明度、交易灵活以及多资产覆盖。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="bg-white p-4 rounded-lg shadow-md card-hover">
+                            <div class="text-primary text-2xl mb-2">
+                                <i class="fa fa-shield"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1">分散风险</h3>
+                            <p class="text-sm text-gray-600">降低单一资产风险</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md card-hover">
+                            <div class="text-primary text-2xl mb-2">
+                                <i class="fa fa-dollar"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1">低成本</h3>
+                            <p class="text-sm text-gray-600">费率远低于主动基金</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md card-hover">
+                            <div class="text-primary text-2xl mb-2">
+                                <i class="fa fa-eye"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1">高透明度</h3>
+                            <p class="text-sm text-gray-600">持仓清晰可见</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md card-hover">
+                            <div class="text-primary text-2xl mb-2">
+                                <i class="fa fa-exchange"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1">交易灵活</h3>
+                            <p class="text-sm text-gray-600">场内交易，流动性好</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://doc.doubao.com/s/SxVEPvjFFOU/" alt="标普500指数图表" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-sm text-gray-500 mt-2 text-center">标普500指数走势图</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF筛选标准与方法 -->
+        <section id="selection" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">ETF筛选标准与方法</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                选择优质ETF是资产配置成功的基础，需重点关注以下关键指标，确保投资组合的长期稳健增长。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-expand"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">基金规模</h3>
+                    <p class="text-gray-600 mb-4">
+                        规模越大的ETF，说明更多投资者愿意申购或买入并持有该基金，反映了市场的认可程度。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">建议选择规模≥10亿美元的美股ETF</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-tachometer"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">流动性</h3>
+                    <p class="text-gray-600 mb-4">
+                        ETF在场内交易，如果流动性较低，每天的买家和卖家数量有限，则有可能导致投资者的交易不成功。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">关注日均成交额，选择同类ETF中日均成交额较高的产品</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">跟踪误差</h3>
+                    <p class="text-gray-600 mb-4">
+                        对指数基金而言，"指数跟得紧不紧"是考察其投资管理能力最重要的指标。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">跟踪误差越小（通常≤0.2%），越能准确复制指数收益</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-percent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">管理费率</h3>
+                    <p class="text-gray-600 mb-4">
+                        直接影响长期收益，费率越低越好。美股宽基ETF费率普遍低于0.1%。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">长期来看，低费率对复利效应的影响显著</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">基金公司实力</h3>
+                    <p class="text-gray-600 mb-4">
+                        基金公司的ETF管理规模越大、管理经验越丰富，在ETF产品布局、ETF运营管理等方面就越完善。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">选择经验丰富、规模大的基金公司产品</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-history"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">历史表现</h3>
+                    <p class="text-gray-600 mb-4">
+                        虽然历史表现不代表未来，但长期稳定的表现往往反映了ETF的管理能力和指数的质量。
+                    </p>
+                    <div class="bg-neutral-light p-3 rounded">
+                        <p class="text-sm font-medium">关注3-5年的年化回报率和最大回撤</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心ETF标的推荐 -->
+        <section id="recommendations" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">核心ETF标的推荐</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                基于严格的筛选标准，以下是适合长期投资的美股ETF标的分类推荐，覆盖不同资产类别和投资风格。
+            </p>
+            
+            <!-- 宽基指数ETF -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800 flex items-center">
+                    <i class="fa fa-globe text-primary mr-3"></i>
+                    宽基指数ETF
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    宽基指数ETF是长期投资的核心配置，能够提供市场平均收益，降低单一资产风险。
+                </p>
+                
+                <div class="table-container bg-white rounded-lg shadow-md overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">ETF代码</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">ETF名称</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">跟踪指数</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">费率</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">规模(亿美元)</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">5年平均年化回报</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">VTI</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Vanguard Total Stock Market ETF</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">CRSP US Total Market Index</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">0.03%</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">19,000</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">13.9%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">VOO</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Vanguard S&P 500 ETF</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">S&P 500 Index</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">0.03%</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">13,000</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">14.5%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">IVV</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">iShares Core S&P 500 ETF</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">S&P 500 Index</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">0.03%</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">6,606</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">14.5%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">SPY</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">SPDR S&P 500 ETF</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">S&P 500 Index</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">0.095%</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">6,548</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">14.5%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">QQQ</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Invesco QQQ Trust</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">NASDAQ 100 Index</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">0.20%</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">3,656</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">14.4%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 bg-neutral-light p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">推荐理由：</h4>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• VTI覆盖美国全市场股票，包括大、中、小盘股，提供最全面的市场暴露</li>
+                        <li>• VOO、IVV和SPY跟踪标普500指数，包含美国最大的500家公司，是美国股市的代表性指数</li>
+                        <li>• QQQ跟踪纳斯达克100指数，主要投资科技巨头，适合追求高增长的投资者</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 纳斯达克100指数图表 -->
+            <div class="mb-12">
+                <img src="https://doc.doubao.com/s/rYkWhdpvYrI/" alt="纳斯达克100指数周线图" class="rounded-lg shadow-lg w-full h-auto">
+                <p class="text-sm text-gray-500 mt-2 text-center">纳斯达克100指数周线图</p>
+            </div>
+            
+            <!-- 其他类型ETF -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- 成长型ETF -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-rocket text-primary mr-2"></i>
+                        成长型ETF
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        成长型ETF主要投资于具有高增长潜力的公司，适合长期投资者追求资本增值。
+                    </p>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF代码</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF名称</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">费率</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">VUG</td>
+                                    <td class="px-4 py-3 text-gray-800">Vanguard Growth ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.04%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">IWF</td>
+                                    <td class="px-4 py-3 text-gray-800">iShares Russell 1000 Growth ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.19%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">ARKK</td>
+                                    <td class="px-4 py-3 text-gray-800">ARK Innovation ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.75%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 价值型ETF -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-diamond text-primary mr-2"></i>
+                        价值型ETF
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        价值型ETF主要投资于估值较低但基本面良好的公司，适合追求稳定收益的投资者。
+                    </p>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF代码</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF名称</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">费率</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">VTV</td>
+                                    <td class="px-4 py-3 text-gray-800">Vanguard Value ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.04%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">SCHV</td>
+                                    <td class="px-4 py-3 text-gray-800">Schwab US Large-Cap Value ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.04%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">AVLV</td>
+                                    <td class="px-4 py-3 text-gray-800">Avantis U.S. Large Cap Value ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.15%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 高股息ETF -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-money text-primary mr-2"></i>
+                        高股息ETF
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        高股息ETF主要投资于股息率较高的公司，适合追求稳定现金流的投资者。
+                    </p>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF代码</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF名称</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">费率</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">股息率</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">SCHD</td>
+                                    <td class="px-4 py-3 text-gray-800">Schwab U.S. Dividend Equity ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.06%</td>
+                                    <td class="px-4 py-3 text-gray-600">3.0-3.5%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">VYM</td>
+                                    <td class="px-4 py-3 text-gray-800">Vanguard High Dividend Yield ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.06%</td>
+                                    <td class="px-4 py-3 text-gray-600">3.0-4.0%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">SDY</td>
+                                    <td class="px-4 py-3 text-gray-800">SPDR S&P Dividend ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.35%</td>
+                                    <td class="px-4 py-3 text-gray-600">3.5-4.5%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- 债券ETF -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-shield text-primary mr-2"></i>
+                        债券ETF
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        债券ETF主要投资于债券，提供稳定的收益和降低组合波动性。
+                    </p>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF代码</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">ETF名称</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">费率</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">BND</td>
+                                    <td class="px-4 py-3 text-gray-800">Vanguard Total Bond Market ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.03%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">TLT</td>
+                                    <td class="px-4 py-3 text-gray-800">iShares 20+ Year Treasury Bond ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.15%</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-3 font-medium text-primary">SHV</td>
+                                    <td class="px-4 py-3 text-gray-800">iShares Short Treasury Bond ETF</td>
+                                    <td class="px-4 py-3 text-gray-600">0.15%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 基于风险偏好的配置方案 -->
+        <section id="allocation" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">基于风险偏好的配置方案</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                根据不同的风险偏好，以下是三种ETF组合配置方案，帮助您根据自身情况选择最适合的投资策略。
+            </p>
+            
+            <!-- 配置方案比较图表 -->
+            <div class="mb-12">
+                <img src="https://doc.doubao.com/s/1jLwIhGo5oE/" alt="ETF组合配置示例" class="rounded-lg shadow-lg w-full h-auto">
+                <p class="text-sm text-gray-500 mt-2 text-center">ETF组合配置示例</p>
+            </div>
+            
+            <!-- 保守型配置 -->
+            <div class="mb-12">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-blue-50 px-6 py-4 border-l-4 border-blue-500">
+                        <h3 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fa fa-shield text-blue-500 mr-3"></i>
+                            保守型配置（适合风险承受能力低的投资者）
+                        </h3>
+                        <p class="text-gray-600 mt-2">
+                            <strong>配置目标：</strong>资产保值，追求稳定回报与现金流，风险偏好低。
+                        </p>
+                        <p class="text-gray-600">
+                            <strong>配置策略：</strong>主打高股息、低波动资产，注重防御性和现金回报。
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="table-container">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">ETF代码</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">配置比例</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">投资理由</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VOO</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">30%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">作为核心配置，提供市场平均收益</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">SCHD</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">35%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">作为核心收息资产，提供稳定且可持续的股息收入</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">BND</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">25%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">提供稳定的债券收益，降低组合波动性</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">SHV</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">10%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">作为现金管理工具，应对流动性需求</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-700">
+                                <strong>预期收益：</strong>年化收益约4-6%，最大回撤约10-15%。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 稳健型配置 -->
+            <div class="mb-12">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-green-50 px-6 py-4 border-l-4 border-green-500">
+                        <h3 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fa fa-balance-scale text-green-500 mr-3"></i>
+                            稳健型配置（适合风险承受能力中等的投资者）
+                        </h3>
+                        <p class="text-gray-600 mt-2">
+                            <strong>配置目标：</strong>长期稳健增值，承受一定波动，不进行高风险博弈。
+                        </p>
+                        <p class="text-gray-600">
+                            <strong>配置策略：</strong>宽基指数为"压舱石"，行业指数为"增强器"。
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="table-container">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">ETF代码</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">配置比例</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">投资理由</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VTI</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">40%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">作为组合基石，提供美国全市场股票暴露</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">QQQ</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">20%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">配置科技成长股，增强组合的增长潜力</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">SCHD</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">15%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">提供稳定的股息收入，降低组合波动性</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">BND</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">15%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">提供稳定的债券收益，平衡组合风险</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VXUS</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">10%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">提供国际市场多元化，降低单一市场风险</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-700">
+                                <strong>预期收益：</strong>年化收益约7-9%，最大回撤约15-20%。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 积极型配置 -->
+            <div class="mb-12">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-red-50 px-6 py-4 border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fa fa-rocket text-red-500 mr-3"></i>
+                            积极型配置（适合风险承受能力高的投资者）
+                        </h3>
+                        <p class="text-gray-600 mt-2">
+                            <strong>配置目标：</strong>追求较高回报，能接受较大波动，投资期限长。
+                        </p>
+                        <p class="text-gray-600">
+                            <strong>配置策略：</strong>重仓高成长性板块，聚焦科技与创新前沿。
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="table-container">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">ETF代码</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">配置比例</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">投资理由</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VTI</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">30%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">作为组合基石，提供美国全市场股票暴露</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">QQQ</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">35%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">配置科技成长股，作为组合的主要增长引擎</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VUG</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">15%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">增加成长股配置，提升组合的增长潜力</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">ARKK</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">10%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">投资创新科技领域，追求高增长机会</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 text-sm font-medium text-primary">VXUS</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">10%</td>
+                                        <td class="px-6 py-4 text-sm text-gray-600">提供国际市场多元化，降低单一市场风险</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 bg-red-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-700">
+                                <strong>预期收益：</strong>年化收益约9-12%，最大回撤约25-30%。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ETF投资全景图 -->
+            <div class="mb-12">
+                <img src="https://doc.doubao.com/s/41oOFMOuJRI/" alt="ETF投资全景图" class="rounded-lg shadow-lg w-full h-auto">
+                <p class="text-sm text-gray-500 mt-2 text-center">ETF投资全景图</p>
+            </div>
+        </section>
+
+        <!-- 投资策略与操作建议 -->
+        <section id="strategy" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">投资策略与操作建议</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                选择合适的投资策略和操作方法，对于实现长期投资目标至关重要。以下是针对ETF投资的具体策略建议。
+            </p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- 定投策略 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-calendar text-primary mr-3"></i>
+                        定投策略
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        建议采用定期定额投资策略，将资金分成若干份，每月或每季度投入一份。
+                    </p>
+                    
+                    <div class="bg-neutral-light p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold mb-2">定投策略的优势：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 分散择时风险：避免一次性在高点投入的风险</li>
+                            <li>• 降低平均成本：在市场下跌时买入更多份额</li>
+                            <li>• 培养投资纪律：坚持长期投资，不被短期波动影响</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">操作建议：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 将资金分成4-6份，每月或每季度投入一份</li>
+                            <li>• 选择固定的投资日期，如每月15日或每季度第一个月的1日</li>
+                            <li>• 坚持投资计划，不因市场短期波动而改变</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 再平衡策略 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-balance-scale text-primary mr-3"></i>
+                        再平衡策略
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        市场涨跌会导致组合中各类资产的比例偏离初始目标，需要定期进行再平衡，以维持风险水平。
+                    </p>
+                    
+                    <div class="bg-neutral-light p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold mb-2">再平衡的优势：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 控制风险：避免单一资产过度集中</li>
+                            <li>• 增强收益：本质是"低买高卖"的过程</li>
+                            <li>• 维持目标配置：确保组合符合风险偏好</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">操作建议：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 再平衡频率：每半年或每年检查一次组合</li>
+                            <li>• 触发条件：当某类资产偏离目标比例超过5%时进行调整</li>
+                            <li>• 调整方法：卖出超配资产，买入低配资产，恢复目标比例</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 股息再投资策略 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-refresh text-primary mr-3"></i>
+                        股息再投资策略
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        对于高股息ETF，建议采用股息再投资策略，将分红自动再投入购买更多份额。
+                    </p>
+                    
+                    <div class="bg-neutral-light p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold mb-2">股息再投资的优势：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 最大化复利效应：股息再投资能够显著提升长期收益</li>
+                            <li>• 降低交易成本：自动再投资无需支付交易佣金</li>
+                            <li>• 简化投资管理：无需手动处理分红资金</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">操作建议：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 在券商账户中设置股息自动再投资功能</li>
+                            <li>• 对于所有高股息ETF（如SCHD、VYM等）采用股息再投资策略</li>
+                            <li>• 定期检查再投资效果，确保策略执行正确</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 税务考量 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                        <i class="fa fa-calculator text-primary mr-3"></i>
+                        税务考量
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        作为中国投资者，持有美股ETF需要了解相关税务规定，合理规划以降低税务成本。
+                    </p>
+                    
+                    <div class="bg-neutral-light p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold mb-2">主要税务规定：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 股息预扣税：美国对非居民征收30%的预扣税，中美税收协定下可降至10%</li>
+                            <li>• 资本利得税：美国通常不对非居民征收资本利得税</li>
+                            <li>• 税务表格：需向券商提交W-8BEN表格以申请优惠税率</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">税务优化建议：</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• 及时提交W-8BEN表格，享受10%的优惠税率</li>
+                            <li>• 考虑将高股息ETF配置在税收优惠账户中</li>
+                            <li>• 长期持有ETF，减少交易频率，降低税务成本</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ETF定投组合投资模板 -->
+            <div class="mb-12">
+                <img src="https://doc.doubao.com/s/5VQXxHycxNQ/" alt="ETF定投组合投资模板" class="rounded-lg shadow-lg w-full h-auto">
+                <p class="text-sm text-gray-500 mt-2 text-center">ETF定投组合投资模板</p>
+            </div>
+        </section>
+
+        <!-- 风险管理建议 -->
+        <section id="risk" class="mb-16 animate-slide-up">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">风险管理建议</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                投资有风险，入市需谨慎。合理的风险管理是长期投资成功的关键，以下是针对ETF投资的风险管理建议。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- 分散投资原则 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-random"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">分散投资原则</h3>
+                    <p class="text-gray-600 mb-4">
+                        分散投资是降低风险的重要策略，建议从多个维度进行分散，避免将所有鸡蛋放在一个篮子里。
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>资产类别分散：配置股票、债券等不同资产类别</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>地域分散：不仅投资美股，也可适当配置国际市场</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>行业分散：避免过度集中于单一行业</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>时间分散：采用定投策略，分散投资时间</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 风险控制措施 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">风险控制措施</h3>
+                    <p class="text-gray-600 mb-4">
+                        建立完善的风险控制体系，确保投资组合的安全性和稳定性。
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>止损策略：设置合理的止损点位，控制单一投资的损失</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>仓位控制：单只ETF持仓不超过总资产的20%</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>流动性管理：保留一定比例的现金或高流动性资产</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>定期评估：每半年评估一次投资组合，根据市场变化调整配置</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 应对市场波动的策略 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-anchor"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">应对市场波动的策略</h3>
+                    <p class="text-gray-600 mb-4">
+                        市场波动是正常现象，制定合理的应对策略，避免情绪化决策。
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>长期投资视角：关注长期趋势，不因短期波动而改变投资策略</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>逆向投资：在市场大幅下跌时，适当增加投资比例</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>心理管理：保持冷静，避免情绪化决策</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <span>信息管理：关注基本面信息，忽略短期市场噪音</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 投资组合表现预测图表 -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-12">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">不同配置方案的预期表现</h3>
+                <div class="h-80">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 总结与展望 -->
+        <section class="animate-slide-up">
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4 text-center">总结与展望</h2>
+                <div class="section-divider mx-auto bg-white"></div>
+                <p class="mb-6 text-center opacity-90">
+                    对于希望长期投入美股市场的投资者，ETF是一种理想的投资工具。
+                    通过选择优质的ETF标的，采用合理的配置策略和操作方法，可以在控制风险的同时，实现长期稳健的资产增值。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <h3 class="font-semibold mb-2">
+                            <i class="fa fa-bullseye mr-2"></i>
+                            选择配置方案
+                        </h3>
+                        <p class="text-sm opacity-90">
+                            根据风险偏好选择保守型、稳健型或积极型配置方案，确保投资策略与个人情况匹配。
+                        </p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <h3 class="font-semibold mb-2">
+                            <i class="fa fa-calendar mr-2"></i>
+                            采用定投策略
+                        </h3>
+                        <p class="text-sm opacity-90">
+                            分散择时风险，降低平均成本，培养长期投资纪律，避免情绪化决策。
+                        </p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <h3 class="font-semibold mb-2">
+                            <i class="fa fa-balance-scale mr-2"></i>
+                            定期再平衡
+                        </h3>
+                        <p class="text-sm opacity-90">
+                            维持目标配置比例，控制风险水平，通过"低买高卖"增强长期收益。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold mb-4">长期展望</h3>
+                    <p class="mb-6 opacity-90">
+                        短期来看，2025年四季度美联储加息放缓预期明确，市场流动性环境边际改善，科技龙头AI业务持续贡献增量，美股有望维持震荡上行趋势。
+                        中长期来看，美国经济软着陆概率提升，2025-2030年标普500成分股净利润年复合增长率预计达8%-10%，其中AI、医疗健康、新能源等领域增速领先，指数长期收益确定性较强。
+                    </p>
+                    <p class="font-semibold">
+                        通过坚持长期投资理念，选择优质的ETF标的，采用科学的配置策略，初始投资有望在10-20年内实现显著增值，为投资者的财务目标提供有力支持。
+                    </p>
+                </div>
+                
+                <div class="mt-8 p-4 bg-white bg-opacity-10 rounded-lg">
+                    <p class="text-sm text-center">
+                        <i class="fa fa-exclamation-triangle mr-2"></i>
+                        风险提示：投资有风险，入市需谨慎。过往业绩不代表未来表现，投资者应根据自身风险承受能力和投资目标谨慎决策。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">ETF投资指南</h3>
+                    <p class="text-gray-400 mb-4">
+                        专业的ETF投资建议，帮助您实现长期财务目标。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="text-gray-400 hover:text-white transition-colors">市场概况</a></li>
+                        <li><a href="#selection" class="text-gray-400 hover:text-white transition-colors">ETF筛选</a></li>
+                        <li><a href="#recommendations" class="text-gray-400 hover:text-white transition-colors">ETF推荐</a></li>
+                        <li><a href="#allocation" class="text-gray-400 hover:text-white transition-colors">配置方案</a></li>
+                        <li><a href="#strategy" class="text-gray-400 hover:text-white transition-colors">投资策略</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">免责声明</h3>
+                    <p class="text-gray-400 text-sm">
+                        本指南仅供参考，不构成投资建议。投资有风险，入市需谨慎。投资者应根据自身情况做出独立的投资决策，并承担相应的投资风险。
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 ETF投资指南. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.sticky-nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 动画触发
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // 投资组合表现预测图表
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2025', '2026', '2027', '2028', '2029', '2030', '2035', '2040'],
+                datasets: [
+                    {
+                        label: '保守型配置',
+                        data: [100, 106, 112, 119, 126, 134, 166, 207],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '稳健型配置',
+                        data: [100, 108, 117, 126, 136, 147, 199, 271],
+                        borderColor: 'rgb(34, 197, 94)',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '积极型配置',
+                        data: [100, 110, 121, 133, 146, 161, 233, 336],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '不同配置方案的相对表现（初始投资=100）'
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: '相对价值（初始=100）'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '年份'
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+
+        // 移动端菜单切换
+        const menuButton = document.querySelector('button.md\\:hidden');
+        const mobileMenu = document.querySelector('.hidden.md\\:flex');
+        
+        if (menuButton) {
+            menuButton.addEventListener('click', function() {
+                // 这里可以添加移动端菜单的显示/隐藏逻辑
+                console.log('Mobile menu button clicked');
+            });
+        }
+    </script>
+</body>
+</html>
