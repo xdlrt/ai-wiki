@@ -1,4 +1,7 @@
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook, faMagnifyingGlass, faFileLines, faChartLine, faCoins } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const App = () => {
   return (
@@ -6,7 +9,7 @@ const App = () => {
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center">
-            <i className="fas fa-book text-primary text-2xl mr-3"></i>
+            <FontAwesomeIcon icon={faBook} className="text-primary text-2xl mr-3" />
             <span className="font-bold text-xl text-gray-900 hidden sm:block">投资研究归档</span>
             <span className="font-bold text-lg text-gray-900 sm:hidden">投资研究</span>
           </div>
@@ -16,7 +19,7 @@ const App = () => {
               className="w-40 sm:w-64 rounded-lg bg-gray-50 text-gray-900 px-3 py-2 pl-9 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all duration-200 group-hover:bg-gray-100"
               placeholder="搜索投资研究..."
             />
-            <i className="fas fa-magnifying-glass absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 group-hover:text-primary transition-colors duration-200"></i>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 group-hover:text-primary transition-colors duration-200" />
           </div>
         </div>
       </nav>
@@ -29,7 +32,7 @@ const App = () => {
               <div className="card-header">
                 <div className="flex items-start">
                   <div className="bg-blue-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center">
-                    <i className="fas fa-file-lines text-blue-600 text-base"></i>
+                    <FontAwesomeIcon icon={faFileLines} className="text-blue-600 text-base" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 line-clamp-1">示例投资分析</h3>
@@ -59,7 +62,7 @@ const App = () => {
               <div className="card-header">
                 <div className="flex items-start">
                   <div className="bg-green-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center">
-                    <i className="fas fa-chart-line text-green-600 text-base"></i>
+                    <FontAwesomeIcon icon={faChartLine} className="text-green-600 text-base" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 line-clamp-1">策略分析</h3>
@@ -89,7 +92,7 @@ const App = () => {
               <div className="card-header">
                 <div className="flex items-start">
                   <div className="bg-purple-50 w-7 h-7 rounded-md mr-3 flex items-center justify-center">
-                    <i className="fas fa-coins text-purple-600 text-base"></i>
+                    <FontAwesomeIcon icon={faCoins} className="text-purple-600 text-base" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 line-clamp-1">投资组合</h3>
@@ -123,7 +126,7 @@ const App = () => {
           <div className="flex justify-center items-center space-x-4">
             <a href="https://github.com/xdlrt/ai-wiki" target="_blank" rel="noopener noreferrer"
                className="text-gray-600 hover:text-primary transition-colors duration-200">
-              <i className="fab fa-github text-xl"></i>
+              <FontAwesomeIcon icon={faGithub} className="text-xl" />
               <span className="ml-2">GitHub</span>
             </a>
           </div>
