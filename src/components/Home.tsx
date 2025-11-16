@@ -5,12 +5,15 @@ import { ActiveFilters } from './ActiveFilters';
 import { cardsData } from '../data/cards';
 import { rootStore } from '../stores';
 import { observer } from 'mobx-react-lite';
+import { Nav } from './Nav';
+import { Footer } from './Footer';
 
 const Home = observer(() => {
   const filteredCards = rootStore.filterCards(cardsData);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col gradient-bg-elegant font-sans">
+      <Nav />
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <section className="mb-4">
           <FilterBar />
@@ -32,7 +35,8 @@ const Home = observer(() => {
           )}
         </section>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 });
 
